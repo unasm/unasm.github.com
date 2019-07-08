@@ -1,0 +1,124 @@
+<html>
+
+    <head>
+        <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+        <meta name=Generator content="Microsoft Word 15 (filtered)">
+        <style>
+            <!--
+            /* Font Definitions */
+            @font-face
+            {font-family:宋体;
+                panose-1:2 1 6 0 3 1 1 1 1 1;}
+            @font-face
+            {font-family:"Cambria Math";
+                panose-1:2 4 5 3 5 4 6 3 2 4;}
+            @font-face
+            {font-family:Calibri;
+                panose-1:2 15 5 2 2 2 4 3 2 4;}
+            @font-face
+            {font-family:"\@宋体";
+                panose-1:2 1 6 0 3 1 1 1 1 1;}
+            /* Style Definitions */
+            p.MsoNormal, li.MsoNormal, div.MsoNormal
+            {margin:0cm;
+                margin-bottom:.0001pt;
+                text-align:justify;
+                text-justify:inter-ideograph;
+                font-size:10.5pt;
+                font-family:"Calibri","sans-serif";}
+            p.MsoHeader, li.MsoHeader, div.MsoHeader
+            {mso-style-link:"页眉 Char";
+                margin:0cm;
+                margin-bottom:.0001pt;
+                text-align:center;
+                layout-grid-mode:char;
+                border:none;
+                padding:0cm;
+                font-size:9.0pt;
+                font-family:"Calibri","sans-serif";}
+            p.MsoFooter, li.MsoFooter, div.MsoFooter
+            {mso-style-link:"页脚 Char";
+                margin:0cm;
+                margin-bottom:.0001pt;
+                layout-grid-mode:char;
+                font-size:9.0pt;
+                font-family:"Calibri","sans-serif";}
+            span.Char
+            {mso-style-name:"页眉 Char";
+                mso-style-link:页眉;}
+            span.Char0
+            {mso-style-name:"页脚 Char";
+                mso-style-link:页脚;}
+            .MsoChpDefault
+            {font-family:"Calibri","sans-serif";}
+            /* Page Definitions */
+            @page WordSection1
+            {size:595.3pt 841.9pt;
+                margin:72.0pt 90.0pt 72.0pt 90.0pt;
+                layout-grid:15.6pt;}
+            div.WordSection1
+            {page:WordSection1;}
+            -->
+        </style>
+
+    </head>
+
+    <body lang=ZH-CN style='text-justify-trim:punctuation'>
+
+        <div class=WordSection1 style='layout-grid:15.6pt'>
+
+            <p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+            <p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Git</span><span
+                style='font-family:宋体'>更换系统之后，</span><span lang=EN-US>ssh</span><span
+                style='font-family:宋体'>无法重用的问题</span></p>
+
+            <p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+                style='font-family:宋体'>之前每次换系统，都需要进行更新</span><span lang=EN-US>ssh</span><span
+                style='font-family:宋体'>，虽然不是很麻烦，但是何必呢</span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                lang=EN-US>&nbsp; </span><span style='font-family:宋体'>昨天将</span><span
+                lang=EN-US>.ssh</span><span style='font-family:宋体'>目录整个拷贝，本来以为这样可以用，但是还是不行，会报错说</span><span
+                lang=EN-US>Permission&nbsp; denied(publishkey)</span><span style='font-family:
+                宋体'>，</span><span lang=EN-US> fat:The*****</span><span style='font-family:宋体'>据从晚上搜来的攻略来说，需要</span><span
+                lang=EN-US>ssh-add </span><span style='font-family:宋体'>但是这边报错</span><span
+                lang=EN-US>,</span><span style='font-family:宋体'>或没有一个经过验证的</span><span
+                lang=EN-US>ssh </span><span style='font-family:宋体'>链接，这个时候</span><span
+                lang=EN-US><img width=451 height=44 id="图片 1"
+                src="image/image001.png"></span><span style='font-family:宋体'>，需要运行</span><span
+                lang=EN-US>eval “$(ssh-agent)” </span><span style='font-family:宋体'>得到</span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                lang=EN-US><img width=205 height=68 id="图片 2"
+                src="image/image002.png"></span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                style='font-family:宋体'>其实之前还有一步，不清楚到底有没有用处，一起拿出来吧</span><span lang=EN-US><img
+                width=340 height=74 id="图片 3" src="image/image003.png"></span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                style='font-family:宋体'>然后我们再次</span><span lang=EN-US>ssh-add<img width=308
+                height=75 id="图片 4" src="image/image004.png"></span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                style='font-family:宋体'>这样，之前的</span><span lang=EN-US>ssh </span><span
+                style='font-family:宋体'>就可以重复利用了</span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                lang=EN-US>&nbsp;</span></p>
+
+            <p class=MsoNormal style='margin-left:5.25pt;text-indent:-5.25pt'><span
+                lang=EN-US>&nbsp;</span></p>
+
+            <p class=MsoNormal><span style='font-family:宋体'>上面的也许是在胡扯呢。。从今天的感觉来说，虽然当时解决了问题，不过后遗症不少，今天的结论是</span><span
+                lang=EN-US>id_rsa</span><span style='font-family:宋体'>文件必须要有，然后其他的通过</span><span
+                lang=EN-US>ssh-add</span><span style='font-family:宋体'>的方式添加</span><span
+                lang=EN-US> .ssh</span><span style='font-family:宋体'>下面的非</span><span
+                lang=EN-US>.pub</span><span style='font-family:宋体'>文件，这样就可以了</span> </p>
+
+        </div>
+
+    </body>
+
+</html>

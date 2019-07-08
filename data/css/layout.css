@@ -1,0 +1,121 @@
+h2{
+    text-align:center;
+}
+p,p a{
+    color:grey;
+}
+strong{
+    color:black;
+}
+ul{
+	padding: 0px;
+	margin:0px;
+}
+a{
+    text-decoration:none;
+}
+ul li{
+    text-decoration:none;
+    list-style:none;
+    float:left;
+}
+.clearfix:after{
+	visibility:hidden;
+	display:block;
+	content:"";
+	height:0px;
+	clear:both;
+}
+img{
+	border:none;
+}
+code{
+    background:black;
+    padding:8px;
+    border-radius:3px;
+    color:green;
+    margin:5px 0;
+}
+/****之上都是对具体标签的改造,下面开始布局***/
+html{
+    background:#E6E6E6;
+    height: 100%;
+    padding: 0px;
+    _height:100%;
+}
+body{
+     font-family:'Droid Serif', 'Microsoft Yahei', serif; 
+     display: block;  
+     padding: 0px;
+     text-align: center;
+     margin: 0px;
+     height: 100%;
+    _height:100%;
+ }
+.wrap{
+    text-align: left;
+    min-height: 100%;
+    width:1020px;
+    margin:0 auto;
+    background:white;
+    overflow-x:hidden; 
+    padding:0 10px;
+    min-height: 100%;
+    _height:100%;
+    /*
+        兼容性代码，防止在非ie下出现body出现滚动条
+    */
+}
+#header{
+    width:100%;
+    height:70px;
+}
+.logo{
+    float:left;
+    width:150px;
+    padding: 0px;
+    margin:0px;
+    line-height:70px;
+    text-align:center;
+}
+.nav{
+    float:left;
+    width:870px;
+    margin:0px;
+    padding: 0px;
+}
+.nav>li{
+    width:134px;
+    text-align: center;
+    margin:20px;
+    _width:115px;
+    list-style:none;
+    font-size:1.3em;
+}
+.choosed{
+    border-bottom:2px solid red;
+}
+#header .menu ul li:last_child{
+    border:none;
+    background:red;
+}
+.menu li{
+    text-align:center;
+    width:100%;
+    font-size:17px;
+    padding:5px 0;
+    border-bottom:1px solid #494141;
+}
+
+.menu ul{
+    position:absolute;
+    background:rgba(0,0,0,0.8);
+    border-radius:2px;
+    width:134px;
+}
+.menu>a{
+    color:#000;
+}
+.menu ul a{
+    color:#C7C2C2;
+}

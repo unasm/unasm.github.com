@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>两次接手开发的经验</title>
+    </head>
+    <body>
+        <blockquote>
+            <p>
+                第一次很大程度上是因为对composer的不了解，其他的配置和之前的差不多
+            </p>
+        </blockquote>
+        <blockquote>
+            <p>这次很大程度上是对框架的不了解，加上对配置的过于复杂</p>
+            <p>首先php要5.5 mysql 5.5 centos最好也是6.5的</p>
+            <p>其次，短标签要打开，修改php.ini,直接将php.ini导入了</p>
+            <p>导入对应的转发规则,nginx/conf.d/default.conf的配置文件，或许可以不是这个名字，但是要有对应的配置文件,</p>
+            <p>数据最好通过source的方式导入，不然容易出问题，一旦版本不完全一致，就会造成读写出故障</p>
+            <p>php-fpm对应的权限，用户有时候是www权限，所以即使对应的是777的权限也会出问题，我将用户名和组修改成了本机的用户名和组tianyi </p>
+            <p>----------------------------半个月后---------------------------</p>
+            <p>我还是把php-fpm 修改成了nginx的权限，否则在post提交的时候会面临错误，无法提交数据,报错如下</p>
+            <code>Warning: REQUEST_BODY_FILE: open('/dev/shm/client_body_temp/0000000001') failed: Permission denied (13)</code>
+        </blockquote>
+    </body>
+</html>

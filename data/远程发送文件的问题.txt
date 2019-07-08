@@ -1,0 +1,10 @@
+当发送数据为
+    $Post['file'] = "@/var/www/psb.jpg";
+    $Post['name'] = "test";
+    的时候
+对面接受到的文件类型为
+application/octet-stream ,这代表对面无法识别出文件类型，在对面判断文件类型的时候，就回出问题，最理想的情况下type应该为image/jpeg
+解决方案为
+$Post['file'] = "@/var/www/psb.jpg;type=image/jpeg";
+$Post['name'] = "test";
+post这样发送就可以了

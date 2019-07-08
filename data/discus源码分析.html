@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <title>discuz源码分析</title>
+
+</head>
+<body>
+    <h2>here is the blog html, you welcome to visitor</h2>
+    <p>index.php 负责了对url的解析和分流，虽然不是很清楚，但是它将app,mobile, 还有各级二级域名的内容导向各个分区，我目前进入了forum.php ， 网页版本的主操作文件</p>
+    <p>forum.php 开始处理论坛模块的核心功能，首先定义全局变量define (apptypeId ,curscript) ,之后载入class_core.php 和function_forum.php</p>
+    <p>class_core 函数里面的class比较多，核心是 class disduz_core, 负责调用协调其他的各个class ,discuz_mysql ,discuz_session , db , discuz_cron ,discuz_process ,discuz_memory </p>
+    <blockquote>
+        <p>discuz_core 里面init_input中对全局变量进行处理，防止对全局变量的注入 , 包含了对post , get cookie ,files的处理和转码  ,rewrite的处理(ps:看不懂它在做什么)</p>
+        <p>discuz_core的init_config中引入了全局配置文件config/config_global.php,做了一些处理之后，将config中的内容引入，成为全局变量</p>
+        <p>discuz_core的init_env中主要对公用的全局变量$_G进行了设置，然后保存在$this->var之中</p>
+        <p>discuz_core的init_output主要是针对xss攻击和防止页面刷新，以及对输出解压的问题 </p>
+    </blockquote>
+    <blockquote>
+        <h4>discuz_core init主要是针对各个不同的功能进行初始化设设置 </h4>
+        <p>_init_db 是对数据库的初始化，连接数据库和设置数据库 ,调用了class DB 我想本意是使用工厂模式，但是子类里面只有db_mysql </p>
+        <p>init_user 是对用户信息的设置，包括用户名和密码 id，以及其他的一些东西</p>
+        <p>init_session 首先检测是否有之前的session信息,包括对非法ip的检测，个人的登录时间，ip的刷新设置，用户组的分配等</p>
+        <p>init style 应该是对论坛风格的设置，网站的外观，是将styleId保存在cookie中的方式进行存储的,不过目前此功能被禁止了，大概是不可以选择论坛风格的意思吧,在settting里面可以看到选择了默认的style</p>
+        <p>init_setting中设置了用户组和用户的论坛风格,将他们加入cachelist，还不清楚cachelist有什么用处</p>
+        <p>
+            init_mobile 是针对手机版本进行的设置,进入之后，首先是检查是否运行添加手机版本，不允许则强制退出
+            通过$_SERVER['http_user_agent']的关键字匹配检验是否是手机浏览器浏览网站，屏蔽手机浏览器,
+            <code>
+                if(preg_match('/(mozilla|chrome|safari|opera|m3gate|winwap|openwave)/i', $_SERVER['HTTP_USER_AGENT'])) {
+                    return false;
+            </code>
+            也就是说这种情况下不可与访问
+            <span>如果没有设置手机跳转，则不行</span>
+            <span>通过浏览器的get方式获取浏览的方式，标准版，急速版,电脑版</span>
+        </p>
+    </blockquote>
+    <blockquote>
+        <h4>init_cron 的作用是执行一些定期的任务，通过时间戳的全局变量内保存的cronnextrun(cronNextRun)来确定，cronnextrun 指的一个是一个确定的时间戳</h4>
+    </blockquote>
+    <blockquote>
+        <h4>discuz_process中用于功能进程管理，防止某些功能并发产生，不清楚是因为安全，还是因为性能 ,以后再看吧，目前先完成整体框架的理解</h4>
+    </blockquote>
+    <blockquote>
+        <h4>init_misc misc是功能的</h4>
+        <p>导入核心语言包</p>
+        <p>设置时区(不用这样吧..时区好像设置成为可选的了)</p>
+        <p>锁定用户和封禁用户</p>
+        <p>站点开关检查</p>
+        <p>禁止访问时段检查</p>
+        <p>每日登录奖励</p>
+    </blockquote>
+    <blockquote>
+        <p>discuz class_core DB的实现方式，我不是很理解，这里好像涉及了某种设计模式(并且我不是很清楚)，而且，通过静态函数的方式....暂时先不理会，理解了discuz的整体框架之后再说</p>
+        <p>一天后.....</p>
+        </p>好像是单例模式和工厂模式的融合,通过静态的变量检测，实现DB的单例化，同时在DB里面约定好接口，db_mysql 在DB的构造函数里面通过单例化和引用构造，实现工厂模式的适配</p>
+    </blockquote>
+    <blockquote>
+        <p>终于看到想看的内容了，就是模板解析。。。总体来说，就一句话，各种正则表达式替换生成，保存，就是了</p>
+        <p>首先通过fread,filesize将文件读取进来,然后正则开始替换，大概有十几个正则的样子，然后通过flock,fwrite，写入文件，fclose就是了</p>
+        <p>至于preg_replace正则是怎么匹配的,真是没有兴趣理解。</p>
+        <p>顺便说一下发现的一个bug，没有文件解锁，这点。。。不同php版本情况不同</p>
+    </blockquote>
+</body>
+</html>

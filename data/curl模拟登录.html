@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>curl模拟登录</title>
+        <link rel="stylesheet" href="layout.css" type="text/css" media="all" />
+    </head>
+<body>
+    <div class="wrap">
+        <h2>curl模拟登录</h2>
+        <blockquote>
+            <p>
+                其实相比于一般的curl发送数据来说只有一条需要注意的，就是cookie的保存方式
+                <code>curl_setopt($curl,CURLOPT_COOKIEJAR,$this->cookieFile);</code>
+                就是需要通过CURLOPT_COOKIEJAR这个设置将cookie保存起来
+            </p>
+            <p>
+                在上面的登录之后，每次需要使用之前的cookie文件，就是设置CURLOPT_COOKIEFILE,讲之前的cookie文件发送，这样就可以模拟登录了
+                <code>
+                    curl_setopt($curl,CURLOPT_COOKIEFILE,$this->cookieFile);
+                </code>
+            </p>
+            <p>
+                因为网站设置了HTTP_USER_AGENT检查，就需要curl_setopt设置        curl_setopt($curl,CURLOPT_USERAGENT,"Mozilla/5.0 (X11; Linux x86_64) AppleWebit/537.36 ()HTML, like Gecko) Ubuntu Chromium/33.0.1750.152 Chrome/33.0.1750.152 Safari/537.36"),保证不会因为非浏览器访问的问题被禁止掉;
+            </p>
+            <p>然后，就可以作为信息采集的重要利器了</p>
+        </blockquote>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>添加远程仓库，于上游代码合并</title>
+        <link rel="stylesheet" href="layout.css" type="text/css" media="all" />
+    </head>
+<body>
+    <div class="wrap">
+        <h2>后台的基础</h2>
+        <blockquote>
+            <p>首先通过命令</p>
+            <code>git remote add  name git_url </code><br/>
+            <p>添加对应的仓库地址</p>
+            <p>然后可以通过命令 </p>
+            <code>git fetch -all </code>
+            <p>获取所有的远程仓库的内容和数据</p>
+            <p>最后通过</p><code>git merge -X theirs branches </code>
+            <p>的方式与远程仓库合并</p>
+        </blockquote>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <boy name = "张三">
+        <score name = "1">123</score>
+        <score name = "2">123</score>
+        <score name = "3">3</score>
+        <score name = "4">23</score>
+    </boy>
+    <boy name = "李四">
+        <score name = "1">123</score>
+        <score name = "3">13</score>
+        <score name = "4">133</score>
+    </boy>
+    <boy name = "王二">
+        <score name = "1">123</score>
+        <score name = "3">13</score>
+        <score name = "4">133</score>
+    </boy>
+    <boy name = "田乙">
+        <score name = "1">123</score>
+        <score name = "3">13</score>
+        <score name = "4">133</score>
+    </boy>
+    <boy name = "小乙">
+        <score name = "1">13</score>
+        <score name = "4">133</score>
+    </boy>
+</root>

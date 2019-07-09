@@ -3,17 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: unasm
-subtitle:
-description:
-keywords:
-author: unasm
-language: zh-Hans
+title: Valar morghulis
+subtitle: 
+description: You're waiting for a train<br/>A train that will take you far away<br/>You know where you hope will be taken<br/>But you can't know for sure<br/>Yet it doesn't matter<br/>Because we'll be together
+#description: I've seen things you people wouldn't believe.<br/>Attack ships on fire off the shoulder of Orion.<br/> I've watched c-beams glitter in the dark near the Tannhauser Gate. <br/> All those ... moments will be lost in time, like tears...in rain. <br/> Time to die.
+keywords: 人工智能，生活随想
+author:
+language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://unasm.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

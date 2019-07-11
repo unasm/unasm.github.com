@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,    func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),    func">
+<meta name="description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,	func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),	func.get_j">
 <meta name="keywords" content="人工智能，生活随想">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark get_json_object的使用方式">
 <meta property="og:url" content="http://unasm.com/2019/07/11/spark-get-json-object的使用方式/index.html">
 <meta property="og:site_name" content="Valar morghulis">
-<meta property="og:description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,    func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),    func">
+<meta property="og:description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,	func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),	func.get_j">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-11T11:37:51.785Z">
+<meta property="og:updated_time" content="2019-07-11T11:42:28.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark get_json_object的使用方式">
-<meta name="twitter:description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,    func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),    func">
+<meta name="twitter:description" content="json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要 1. 创建dataframe123456input_parsed = data.select(	data.recordid,	func.get_json_object(data.raw, &amp;apos;$.eventName&amp;apos;).alias(&amp;quot;eventname&amp;quot;),	func.get_j">
 
 
 
@@ -311,7 +311,7 @@
 
       
         <p>json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要</p>
-<h4 id="1-创建dataframe"><a href="#1-创建dataframe" class="headerlink" title="1. 创建dataframe"></a>1. 创建dataframe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input_parsed = data.select(</span><br><span class="line">	data.recordid,</span><br><span class="line">    func.get_json_object(data.raw, &apos;$.eventName&apos;).alias(&quot;eventname&quot;),</span><br><span class="line">    func.get_json_object(data.raw, &apos;$.message.input.context.source.platform&apos;).alias(&quot;source&quot;),</span><br><span class="line">    func.get_json_object(data.raw, &apos;$.message.output.semantic.confidence.score&apos;).alias(&quot;score&quot;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="1-创建dataframe"><a href="#1-创建dataframe" class="headerlink" title="1. 创建dataframe"></a>1. 创建dataframe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input_parsed = data.select(</span><br><span class="line">	data.recordid,</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.eventName&apos;).alias(&quot;eventname&quot;),</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.message.input.context.source.platform&apos;).alias(&quot;source&quot;),</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.message.output.semantic.confidence.score&apos;).alias(&quot;score&quot;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <p>这种方式，是直接创建一个dataframe，实现json与dataframe的转化</p>
 <h4 id="2-直接作为筛选条件和select字段"><a href="#2-直接作为筛选条件和select字段" class="headerlink" title="2. 直接作为筛选条件和select字段"></a>2. 直接作为筛选条件和select字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	json as raw,</span><br><span class="line">	get_json_object(json, &apos;$.logTime&apos;) as logtime,</span><br><span class="line">	get_json_object(json, &apos;$.recordId&apos;) as recordid </span><br><span class="line">	from his.ba_prod_trace_log_new</span><br><span class="line">where day = 20190630 and hour = 19</span><br><span class="line">	and get_json_object(json, &apos;$.module&apos;) = &apos;baserver&apos; and</span><br><span class="line">	get_json_object(json, &apos;$.eventName&apos;) = &apos;sys_input_output&apos;</span><br></pre></td></tr></table></figure>

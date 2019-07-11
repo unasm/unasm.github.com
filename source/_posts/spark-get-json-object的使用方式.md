@@ -3,19 +3,17 @@ title: spark get_json_object的使用方式
 date: 2019-07-11 19:28:27
 tags:
 ---
-
 json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要
 #### 1. 创建dataframe
 ```
 input_parsed = data.select(
 	data.recordid,
-    func.get_json_object(data.raw, '$.eventName').alias("eventname"),
-    func.get_json_object(data.raw, '$.message.input.context.source.platform').alias("source"),
-    func.get_json_object(data.raw, '$.message.output.semantic.confidence.score').alias("score")
+	func.get_json_object(data.raw, '$.eventName').alias("eventname"),
+	func.get_json_object(data.raw, '$.message.input.context.source.platform').alias("source"),
+	func.get_json_object(data.raw, '$.message.output.semantic.confidence.score').alias("score")
 )
 ```
 这种方式，是直接创建一个dataframe，实现json与dataframe的转化
-
 #### 2. 直接作为筛选条件和select字段
 ```
 select 

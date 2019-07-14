@@ -318,7 +318,7 @@
 
 <h4 id="lldb的写法-括号内是缩写"><a href="#lldb的写法-括号内是缩写" class="headerlink" title="lldb的写法(括号内是缩写)"></a>lldb的写法(括号内是缩写)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. target create a.out	( tc a.out)			# 载入可执行文件</span><br><span class="line">2. breakpoint set --name main	(br s --name main)      # 在main方法处设置断点</span><br><span class="line">3. process launch (pro la)				# 启动程序</span><br><span class="line">4. thread backtrace					# 打印线程调用栈</span><br><span class="line">5. thread step-in (th step-in)			        # 进入方法</span><br><span class="line">6. expression argc	(p argc)			# 打印变量</span><br><span class="line">7. thread step-over (th step-over)			# 下一步</span><br><span class="line">8. quit (q)					        # 退出</span><br></pre></td></tr></table></figure>
 
-<p>能看出来，感觉lldb原生的命令，还是更啰嗦的，不过格式也更清晰 <noun> <verb> [options] [argument]<br>lldb 支持缩紧，可以输入target 然后按table 会自动补全，这是一个有意思的feature。</verb></noun></p>
+<p>能看出来，感觉lldb原生的命令，还是更啰嗦的，不过格式也更清晰 [noun] [verb] [options] [argument]<br>lldb 支持tab，可以输入target 然后按table 会自动补全，这是一个有意思的feature。</p>
 <h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><ol>
 <li>gui 也是一个很有意思的命令，显示一个IDE的终端界面，只能看，不能操作，操作还是要回到命令行的</li>
 <li>apropos 增强版的help，apropos frame 可以显示和frame 相关的命令，以及具体作用</li>

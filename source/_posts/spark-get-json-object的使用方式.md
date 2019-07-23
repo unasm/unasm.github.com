@@ -1,7 +1,7 @@
 ---
 title: spark get_json_object的使用方式
 date: 2019-07-11 19:28:27
-tags:
+tags: 大数据, 计算机
 ---
 json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要
 #### 1. 创建dataframe

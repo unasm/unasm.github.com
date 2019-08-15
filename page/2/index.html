@@ -243,6 +243,132 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/07/11/spark-get-json-object的使用方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Valar morghulis">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/11/spark-get-json-object的使用方式/" itemprop="url">spark get_json_object的使用方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-11T19:28:27+08:00">
+                2019-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>json 扮演的角色越来越重，如何在spark中处理json数据也变得越来越重要</p>
+<h4 id="1-创建dataframe"><a href="#1-创建dataframe" class="headerlink" title="1. 创建dataframe"></a>1. 创建dataframe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input_parsed = data.select(</span><br><span class="line">	data.recordid,</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.eventName&apos;).alias(&quot;eventname&quot;),</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.message.input.context.source.platform&apos;).alias(&quot;source&quot;),</span><br><span class="line">	func.get_json_object(data.raw, &apos;$.message.output.semantic.confidence.score&apos;).alias(&quot;score&quot;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这种方式，是直接创建一个dataframe，实现json与dataframe的转化</p>
+<h4 id="2-直接作为筛选条件和select字段"><a href="#2-直接作为筛选条件和select字段" class="headerlink" title="2. 直接作为筛选条件和select字段"></a>2. 直接作为筛选条件和select字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	json as raw,</span><br><span class="line">	get_json_object(json, &apos;$.logTime&apos;) as logtime,</span><br><span class="line">	get_json_object(json, &apos;$.recordId&apos;) as recordid </span><br><span class="line">	from his.ba_prod_trace_log_new</span><br><span class="line">where day = 20190630 and hour = 19</span><br><span class="line">	and get_json_object(json, &apos;$.module&apos;) = &apos;baserver&apos; and</span><br><span class="line">	get_json_object(json, &apos;$.eventName&apos;) = &apos;sys_input_output&apos;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式的好处，就是可以直接在json 之中实现查找，直接定位自己想要的内容，很赞</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/07/09/读未来简史有感/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -541,7 +667,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

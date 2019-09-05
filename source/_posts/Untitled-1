@@ -1,0 +1,47 @@
+
+
+
+def trans(day):
+    formattedDateProcess = datetime.strptime(day, "%Y%m%d")
+    formattedDateTimeProcess = formattedDateProcess.strftime("%Y-%m-%d 00:00:00")
+    oneday = timedelta(days=1)
+    nextDayTime = (formattedDateProcess + oneday).strftime("%Y-%m-%d 00:00:00")
+    nextDay = (formattedDateProcess + oneday).strftime("%Y%m%d")
+    sql = """
+        select json as raw, 
+            get_json_object(json, '$.logTime') as logtime, get_json_object(json, '$.recordId') as recordid 
+            from  his.ba_prod_trace_log_new where day in ("%s", "%s")
+            and get_json_object(json, '$.module') = 'baserver'
+            and get_json_object(json, '$.eventName') = 'sys_input_output'
+            and get_json_object(json, '$.logTime') >= '%s'
+            and get_json_object(json, '$.logTime') < '%s'
+    """ % (day, nextDay, formattedDateTimeProcess, nextDayTime)
+    data = spark.sql(sql)
+    data_2 = data.select(
+        data.recordid,
+        data.logtime,
+        func.get_json_object(data.raw, '$.message').alias("message")
+    )
+    input_parsed = data_2.select(
+        data_2.recordid,
+        data_2.logtime,
+        func.get_json_object(data_2.message, '$.message.input.context.source.platform').alias("source"),
+        func.get_json_object(data_2.message, '$.message.output.semantic.confidence.score').alias("score"),
+        func.get_json_object(data_2.message, '$.message.output.semantic.confidence.level').alias("level"),
+        func.get_json_object(data_2.message, '$.message.input.request.requestId').alias("requestId"),
+        func.get_json_object(data_2.message, '$.message.input.request.type').alias("requesttype"),
+        func.get_json_object(data_2.message, '$.message.input.context.user.userId').alias("userId"),
+        func.get_json_object(data_2.message, '$.message.output.semantic.skillId').alias("semantic__skillId"),
+        func.get_json_object(data_2.message, '$.message.input.context.product.productId').alias("productid"),
+        func.get_json_object(data_2.message,  '$.message.input.session.sessionId').alias("sessionId"),
+        func.get_json_object(data_2.message,  '$.message.input.request.inputs[0].input').alias("query"),
+        func.get_json_object(data_2.message,  '$.message.input.context.skill.skillId').alias("input_skill"),
+
+        func.when(func.get_json_object(data_2.message, '$.message.output.response.speak.text').isNotNull(),
+            func.get_json_object(data_2.message, '$.message.output.response.speak.text'))
+            .when(func.get_json_object(data_2.message, '$.message.output.response.widget.subTitle').isNotNull(), func.get_json_object(data_2.message, '$.message.output.response.widget.subTitle'))
+            .otherwise("").alias("answer")
+
+    )
+    input_parsed.createOrReplaceTempView("input_parsed")
+    return input_parsed

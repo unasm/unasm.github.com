@@ -243,6 +243,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/26/CMakeLists的讲解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Valar morghulis">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/26/CMakeLists的讲解/" itemprop="url">CMakeLists的讲解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-26T23:32:01+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>下面是一段一个系统的cmakelist.txt 文件，我解释下其中的部分，作为自己以后解读cmake 的备忘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.0)</span><br><span class="line"></span><br><span class="line">// 项目名，必须放在第二位，不然会有CMake Error: Error required internal CMake variable not set这种错误</span><br><span class="line">project( gqa )</span><br><span class="line"></span><br><span class="line">// 设置Debug 模式还是Relase模型， 可以用 cmake -DCMAKE_BUILD_TYPE=Debug . 指定Debug模式</span><br><span class="line">IF(NOT CMAKE_BUILD_TYPE)</span><br><span class="line">    SET(CMAKE_BUILD_TYPE Release)</span><br><span class="line">ENDIF()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//message 没有逻辑意义，用于输入提示和变量信息，比如下面，就是用于输出RPC_INCLUDES的变量,</span><br><span class="line">// 其值在rpc-framework-cpp/cmakelist.txt 中 set (RPC_INCLUDES &quot;$&#123;_RPC_DIR&#125;/proto&quot; &quot;$&#123;_RPC_DIR&#125;/include&quot; $&#123;LIBEVENT_INCLUDE_DIRS&#125;) 设置</span><br><span class="line">message(&quot;RPC_INCLUDES=&quot; $&#123;RPC_INCLUDES&#125;)</span><br><span class="line">#set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -W&quot;)</span><br><span class="line"></span><br><span class="line"># 设置CMAKE_CXX_FLAGS </span><br><span class="line">set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -pthread -Wl,--as-needed&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">include_directories(</span><br><span class="line">                                   </span><br><span class="line">                   )</span><br><span class="line"></span><br><span class="line">                   </span><br><span class="line"># SET 本身只是将 后面的值集合起来通过第一个符号来表示</span><br><span class="line">SET(PATH_INCLUDE_DIR ./include )</span><br><span class="line">set (asm_sources </span><br><span class="line">                ./src/lib/data_utils.cpp</span><br><span class="line">                ./src/lib/test_data_utils.cpp</span><br><span class="line">                ./src/lib/punctuation_model.cpp  </span><br><span class="line">                ./src/lib/punctuation_service.cpp      </span><br><span class="line">                ./src/lib/beam_search_ops.cc</span><br><span class="line">                ./src/lib/beam_search_ops_gpu.cu.cc</span><br><span class="line">                ./src/lib/segmenter.cpp</span><br><span class="line">                ./src/lib/usefultools.cpp </span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">SET(jsoncpp_sources            </span><br><span class="line">                ./src/lib/json_reader.cpp</span><br><span class="line">                ./src/lib/json_value.cpp</span><br><span class="line">                ./src/lib/json_writer.cpp</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line"># PROJECT_SOURCE_DIR 是自动的, 表示项目的home目录, link_directories 指定要链接的库文件的路径</span><br><span class="line">link_directories($&#123;PROJECT_SOURCE_DIR&#125;/3rdparty)</span><br><span class="line"></span><br><span class="line">set(CODE_DIRS $&#123;PROJECT_SOURCE_DIR&#125;/src)</span><br><span class="line"></span><br><span class="line">set(SOURCE_DIR $&#123;CODE_DIRS&#125;/lib)</span><br><span class="line">set(TEST_DIR $&#123;CODE_DIRS&#125;/test)</span><br><span class="line"></span><br><span class="line">#EXECUTABLE_OUTPUT_PATH  和 LIBRARY_OUTPUT_PATH 是cmake的常量，表示输出的lib和bin的目录，这里控制输出的路径</span><br><span class="line">set(EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/bin)</span><br><span class="line">set(LIBRARY_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/lib)</span><br><span class="line"></span><br><span class="line">#add_subdirectory($&#123;SOURCE_DIR&#125; $&#123;LIBRARY_OUTPUT_PATH&#125;)</span><br><span class="line">#add_subdirectory($&#123;TEST_DIR&#125; $&#123;EXECUTABLE_OUTPUT_PATH&#125;)</span><br><span class="line"></span><br><span class="line"># 创建一个共享的库文件，运行时动态链接，还有STATIC，MODULE两种选项，分别表示静态库和模块库</span><br><span class="line">add_library(punctuation_lib SHARED</span><br><span class="line">    $&#123;asm_sources&#125;</span><br><span class="line">    $&#123;jsoncpp_sources&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为punctuation_lib指定类库，也就是为库文件指定include目录， </span><br><span class="line">target_include_directories(punctuation_lib PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为指定的类库文件指定它的依赖</span><br><span class="line">target_link_libraries(punctuation_lib </span><br><span class="line">    libtensorflow_framework.so </span><br><span class="line">    libtensorflow_cc.so</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建一个可执行的文件，指定它的源码文件, 也就是下面几行都是设置test文件</span><br><span class="line">add_executable(test_tf $&#123;TEST_DIR&#125;/test.cpp)</span><br><span class="line">target_include_directories(test_tf PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line">target_link_libraries(test_tf </span><br><span class="line">    punctuation_lib</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#获取rpc-framework-cpp 的代码</span><br><span class="line">if(EXISTS &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot; AND IS_DIRECTORY &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot;)</span><br><span class="line">    message(STATUS &quot;dependency grpc already exits&quot;)</span><br><span class="line">else()</span><br><span class="line">    execute_process(COMMAND git clone -b v0.1.3-protobuf3.7 https://his_group:Aispeech_hisgroup@git.aispeech.com.cn/his-rpc/rpc-framework-cpp.git $&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp)</span><br><span class="line">endif()</span><br><span class="line">include(./rpc-framework-cpp/CMakeLists.txt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 正式的可执行文件, 也就是每个可执行文件 都有 add_executable/target_include_directories/target_link_libraries 三个步骤,</span><br><span class="line"># 指定include文件和类库，源码文件，比如 target_link_libraries 指定了两个类库，分别由RPC_LIBS和punctuation_lib指定</span><br><span class="line"># 而punctuation_lib是类库，在上面有设置，而RPC_SRC则分别由set(RPC_LIBS event), set(RPC_LIBS $&#123;RPC_LIBS&#125; protobuf grpc++_unsecure gpr) 指定</span><br><span class="line">add_executable(rpcserver rpcserver.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">target_include_directories(rpcserver PUBLIC $&#123;RPC_INCLUDES&#125; $&#123;PROJECT_SOURCE_DIR&#125;/src/include)</span><br><span class="line">target_link_libraries(rpcserver $&#123;RPC_LIBS&#125; punctuation_lib)</span><br><span class="line">#add_executable(rpcclient rpcclient.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">#target_link_libraries(rpcclient  $&#123;RPC_LIBS&#125;)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/19/美联储读后感/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,7 +437,7 @@
             <h4 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h4><p>a. 卡特总统开始甄选美联储出席的候选人，美国的经济此时正处在水深火热之中，通货膨胀达到13%， CPI(消费指数)达到11%，美元贬值，油价暴涨，社会财富两极化严重， 并且初步介绍了美联储，“是代议制民主核心中一个至关重要的畸形人，是与自治民权神话并存的矛盾体”，若隐若现，主宰了经济，但是消失在公众之外。卡特总统的演讲里面有一番话很有意思。不过我感觉今天美国依旧消费主义大行其道，人依旧寅吃卯粮。卡特的这番话似乎并没有大作用。</p>
 <p>b. “在一个崇尚努力工作，家庭稳固，亲密社区和上帝信仰的国家，我们当中太多人越来越崇拜自我放纵和过度消费。人们对身份的认知已经不再依靠行为，而是对财产的拥有。但我们发现，拥有和消费并不能满足我们对人生意义的向往，堆积如山的物质财富并不能填满我们因缺乏信心和生活目标而产生的空虚感”</p>
 <p>c. 保罗*沃尔克就位，第二天道琼斯爬升，金价下降，故事开始了。</p>
-<h4 id="2-第二章介绍美联储"><a href="#2-第二章介绍美联储" class="headerlink" title="2. 第二章介绍美联储"></a>2. 第二章介绍美联储</h4><p>a. 十足的怪胎，由最高层是七位美联储委员，由美国总统任命，参议院认可，七位委员与12家储备银行行长共享权利，12位行长在各地区私人银行效力，他们是由各区的董事会选举产生的。每次委员会决议，要由12名成员， 7位美联储委员和5位联邦储备银行行长，后者由12名行长中轮流产生。之所以是怪胎是因为美联储绝缘于普通人的监督，又控制普通人的生活（unasm：有没有点中国政府的感觉）</p>
+<h4 id="2-第二章介绍美联储"><a href="#2-第二章介绍美联储" class="headerlink" title="2. 第二章介绍美联储"></a>2. 第二章介绍美联储</h4><p>a. 是个十足的怪胎，最高层是七位美联储委员，由美国总统任命，参议院认可，七位委员与12家储备银行行长共享权利，12位行长在各地区私人银行效力，他们是由各区的董事会选举产生的。每次委员会决议，要由12名成员，7位美联储委员和5位联邦储备银行行长，后者由12名行长中轮流产生。之所以是怪胎是因为美联储绝缘于普通人的监督，又控制普通人的生活（unasm：有没有点中国政府的感觉）</p>
 <p>b. 美联储有两个小小的阀门，1. 直接面向银行的贴现借贷，2. 政府有价债券的市场买卖。 当美联储从银行手里买入国库券和票据时，不过是将创造的货币存入了买入了这些有价债券的金融机构的储备账户中，增加了货币供给。美联储注入的资金被称为高能货币，复制的过程令人眼花缭乱，美联储注入10亿美元，银行体系立即生成8.4亿贷款，即除去16% 的储备金，8.4亿的贷款又会成为新的贷款本金，除去16%的储备金，剩下7.06美元，也会成为新的存款，并且衍生出新的借贷业务，扣除16%的储备金之后，又会产生5.93亿美元，以此类推， 10亿美元最终在存款中变成超过50美元，这些可以看过全美国的货币供给量，即M-1总额。如果银行的投资组合因借贷政策过于激进而超过了储备金量，它又两个选择， 1. 必须在每周一次的申报期结束时做存结，吸收贷款，废除存款记录， 2. 暂时借入储备金，而这种借入也是有价格的，也就是联邦资金利率。</p>
 <h4 id="3-货币主义VS凯恩斯主义"><a href="#3-货币主义VS凯恩斯主义" class="headerlink" title="3. 货币主义VS凯恩斯主义"></a>3. 货币主义VS凯恩斯主义</h4><p>a. 1963年，米尔顿*弗里德曼 和安娜出版了代表其事业巅峰的《美国货币史》。作为倡导自由的保守主义者，弗里德曼从根本上反对政府对私有制市场的自然运行机制进行任何形式的干预， 但是他和凯恩斯主义之间最尖锐的矛盾还是在经济受控于政治的思想。弗里德曼坚称：凯恩斯主义看似以扩大政府财政支出为中心的政府财政政策只会带来短暂的回报，政府对私有经济的影响力其根源来自于对货币的控制，即美联储的货币政策，而美联对货币供给的操作只会破坏社会稳定且遗祸无穷。美联储总是不负责任的控制货币供给量，供给过多造成通货膨胀，然后再实施货币紧缩，从而阻断经济发展，引发经济衰退。</p>
 <p>b. 沃尔克希望通过遏制货币统计来调控经济，降低货币的供给可以提高利率，抑制通货膨胀，而比起直接提高利率的方式，通过遏制货币供给可以把利率提高到超出水平的程度而免受攻击。</p>
@@ -1480,129 +1600,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/08/03/8月份投资的建议报告/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Valar morghulis">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/03/8月份投资的建议报告/" itemprop="url">8月份投资的建议报告</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T23:03:05+08:00">
-                2019-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天重新看了招商证券的八月份的策略观点和配置建议，主要观点是说，市场流动性增加，但是贸易战和基本面都没有明显的变化，市场主题是震荡上升，不会有很大的变化。<br>推荐的是科技股，5G, 云计算相关的标的，主要还是因为华为牛逼吧，下面是5G 相关的标的，可以保持关注。</p>
-<p>震荡上升，不会有大波动，挺好的。</p>
-<p><img src="/2019/08/03/8月份投资的建议报告/5g_link.jpg" alt="5g标的连接图"></p>
-<p>还有一个很有趣的观点，就是经济从高增长到高质量增长，目标GDP是6.0-6.5%， 实际是6.3%, 挺好的，一切都在计划中，天不会塌。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1653,7 +1650,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

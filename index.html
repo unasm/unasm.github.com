@@ -243,6 +243,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/27/visual-studio-code-远程调试C-代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Valar morghulis">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/27/visual-studio-code-远程调试C-代码/" itemprop="url">visual studio code 远程调试C++代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-27T14:46:07+08:00">
+                2019-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>神奇的vscode，通过vscode直接调试容器中的代码，可以避免处理环境依赖的问题，大大减少琐事。</p>
+<p>主要依赖几个插件，Remote Development Remote Containers用于链接容器, 然后选择Attach a Exist Container, 自己先通过docker run -d 启动容器，这样能加速，并且环境稳定。</p>
+<p>如果希望调试的话，就必须配置launch.js, 可以通过C/C++ Build and Debug Active File 来创建，其中 program 要制定为自己cmake 生成的out文件，args酌情修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // Use IntelliSense to learn about possible attributes.</span><br><span class="line">    // Hover to view descriptions of existing attributes.</span><br><span class="line">    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) Launch&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/build/bin/rpcserver&quot;,</span><br><span class="line">            &quot;args&quot;: [&quot;$&#123;workspaceFolder&#125;/res&quot;],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: false,</span><br><span class="line">            //&quot;MIMode&quot;: &quot;lldb&quot;,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;,</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                    &quot;ignoreFailures&quot;: true</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/26/CMakeLists的讲解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -314,8 +436,8 @@
       
         
           
-            <p>下面是一段一个系统的cmakelist.txt 文件，我解释下其中的部分，作为自己以后解读cmake 的备忘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.0)</span><br><span class="line"></span><br><span class="line">// 项目名，必须放在第二位，不然会有CMake Error: Error required internal CMake variable not set这种错误</span><br><span class="line">project( gqa )</span><br><span class="line"></span><br><span class="line">// 设置Debug 模式还是Relase模型， 可以用 cmake -DCMAKE_BUILD_TYPE=Debug . 指定Debug模式</span><br><span class="line">IF(NOT CMAKE_BUILD_TYPE)</span><br><span class="line">    SET(CMAKE_BUILD_TYPE Release)</span><br><span class="line">ENDIF()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//message 没有逻辑意义，用于输入提示和变量信息，比如下面，就是用于输出RPC_INCLUDES的变量,</span><br><span class="line">// 其值在rpc-framework-cpp/cmakelist.txt 中 set (RPC_INCLUDES &quot;$&#123;_RPC_DIR&#125;/proto&quot; &quot;$&#123;_RPC_DIR&#125;/include&quot; $&#123;LIBEVENT_INCLUDE_DIRS&#125;) 设置</span><br><span class="line">message(&quot;RPC_INCLUDES=&quot; $&#123;RPC_INCLUDES&#125;)</span><br><span class="line">#set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -W&quot;)</span><br><span class="line"></span><br><span class="line"># 设置CMAKE_CXX_FLAGS </span><br><span class="line">set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -pthread -Wl,--as-needed&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">include_directories(</span><br><span class="line">                                   </span><br><span class="line">                   )</span><br><span class="line"></span><br><span class="line">                   </span><br><span class="line"># SET 本身只是将 后面的值集合起来通过第一个符号来表示</span><br><span class="line">SET(PATH_INCLUDE_DIR ./include )</span><br><span class="line">set (asm_sources </span><br><span class="line">                ./src/lib/data_utils.cpp</span><br><span class="line">                ./src/lib/test_data_utils.cpp</span><br><span class="line">                ./src/lib/punctuation_model.cpp  </span><br><span class="line">                ./src/lib/punctuation_service.cpp      </span><br><span class="line">                ./src/lib/beam_search_ops.cc</span><br><span class="line">                ./src/lib/beam_search_ops_gpu.cu.cc</span><br><span class="line">                ./src/lib/segmenter.cpp</span><br><span class="line">                ./src/lib/usefultools.cpp </span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">SET(jsoncpp_sources            </span><br><span class="line">                ./src/lib/json_reader.cpp</span><br><span class="line">                ./src/lib/json_value.cpp</span><br><span class="line">                ./src/lib/json_writer.cpp</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line"># PROJECT_SOURCE_DIR 是自动的, 表示项目的home目录, link_directories 指定要链接的库文件的路径</span><br><span class="line">link_directories($&#123;PROJECT_SOURCE_DIR&#125;/3rdparty)</span><br><span class="line"></span><br><span class="line">set(CODE_DIRS $&#123;PROJECT_SOURCE_DIR&#125;/src)</span><br><span class="line"></span><br><span class="line">set(SOURCE_DIR $&#123;CODE_DIRS&#125;/lib)</span><br><span class="line">set(TEST_DIR $&#123;CODE_DIRS&#125;/test)</span><br><span class="line"></span><br><span class="line">#EXECUTABLE_OUTPUT_PATH  和 LIBRARY_OUTPUT_PATH 是cmake的常量，表示输出的lib和bin的目录，这里控制输出的路径</span><br><span class="line">set(EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/bin)</span><br><span class="line">set(LIBRARY_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/lib)</span><br><span class="line"></span><br><span class="line">#add_subdirectory($&#123;SOURCE_DIR&#125; $&#123;LIBRARY_OUTPUT_PATH&#125;)</span><br><span class="line">#add_subdirectory($&#123;TEST_DIR&#125; $&#123;EXECUTABLE_OUTPUT_PATH&#125;)</span><br><span class="line"></span><br><span class="line"># 创建一个共享的库文件，运行时动态链接，还有STATIC，MODULE两种选项，分别表示静态库和模块库</span><br><span class="line">add_library(punctuation_lib SHARED</span><br><span class="line">    $&#123;asm_sources&#125;</span><br><span class="line">    $&#123;jsoncpp_sources&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为punctuation_lib指定类库，也就是为库文件指定include目录， </span><br><span class="line">target_include_directories(punctuation_lib PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为指定的类库文件指定它的依赖</span><br><span class="line">target_link_libraries(punctuation_lib </span><br><span class="line">    libtensorflow_framework.so </span><br><span class="line">    libtensorflow_cc.so</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建一个可执行的文件，指定它的源码文件, 也就是下面几行都是设置test文件</span><br><span class="line">add_executable(test_tf $&#123;TEST_DIR&#125;/test.cpp)</span><br><span class="line">target_include_directories(test_tf PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line">target_link_libraries(test_tf </span><br><span class="line">    punctuation_lib</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#获取rpc-framework-cpp 的代码</span><br><span class="line">if(EXISTS &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot; AND IS_DIRECTORY &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot;)</span><br><span class="line">    message(STATUS &quot;dependency grpc already exits&quot;)</span><br><span class="line">else()</span><br><span class="line">    execute_process(COMMAND git clone -b v0.1.3-protobuf3.7 https://his_group:Aispeech_hisgroup@git.aispeech.com.cn/his-rpc/rpc-framework-cpp.git $&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp)</span><br><span class="line">endif()</span><br><span class="line">include(./rpc-framework-cpp/CMakeLists.txt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 正式的可执行文件, 也就是每个可执行文件 都有 add_executable/target_include_directories/target_link_libraries 三个步骤,</span><br><span class="line"># 指定include文件和类库，源码文件，比如 target_link_libraries 指定了两个类库，分别由RPC_LIBS和punctuation_lib指定</span><br><span class="line"># 而punctuation_lib是类库，在上面有设置，而RPC_SRC则分别由set(RPC_LIBS event), set(RPC_LIBS $&#123;RPC_LIBS&#125; protobuf grpc++_unsecure gpr) 指定</span><br><span class="line">add_executable(rpcserver rpcserver.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">target_include_directories(rpcserver PUBLIC $&#123;RPC_INCLUDES&#125; $&#123;PROJECT_SOURCE_DIR&#125;/src/include)</span><br><span class="line">target_link_libraries(rpcserver $&#123;RPC_LIBS&#125; punctuation_lib)</span><br><span class="line">#add_executable(rpcclient rpcclient.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">#target_link_libraries(rpcclient  $&#123;RPC_LIBS&#125;)</span><br></pre></td></tr></table></figure>
+            <p>下面是一个系统的cmakelist.txt 文件，我解释下其中的部分，作为自己以后解读cmake的备忘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.0)</span><br><span class="line"></span><br><span class="line">// 项目名，必须放在第二位，不然会有CMake Error: Error required internal CMake variable not set这种错误</span><br><span class="line">project( gqa )</span><br><span class="line"></span><br><span class="line">// 设置Debug 模式还是Relase模型， 可以用 cmake -DCMAKE_BUILD_TYPE=Debug . 指定Debug模式</span><br><span class="line">IF(NOT CMAKE_BUILD_TYPE)</span><br><span class="line">    SET(CMAKE_BUILD_TYPE Release)</span><br><span class="line">ENDIF()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// message 没有逻辑意义，用于输入提示和变量信息，比如下面，就是用于输出RPC_INCLUDES的变量,</span><br><span class="line">// 其值在rpc-framework-cpp/cmakelist.txt 中 set (RPC_INCLUDES &quot;$&#123;_RPC_DIR&#125;/proto&quot; &quot;$&#123;_RPC_DIR&#125;/include&quot; $&#123;LIBEVENT_INCLUDE_DIRS&#125;) 设置</span><br><span class="line">message(&quot;RPC_INCLUDES=&quot; $&#123;RPC_INCLUDES&#125;)</span><br><span class="line">#set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -W&quot;)</span><br><span class="line"></span><br><span class="line"># 设置CMAKE_CXX_FLAGS </span><br><span class="line">set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -std=c++11 -pthread -Wl,--as-needed&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 表示本项目并没有include目录</span><br><span class="line">include_directories(</span><br><span class="line">                                   </span><br><span class="line">                   )</span><br><span class="line"></span><br><span class="line">                   </span><br><span class="line"># SET 本身只是将后面的值集合起来通过第一个符号来表示</span><br><span class="line">SET(PATH_INCLUDE_DIR ./include )</span><br><span class="line">set (asm_sources </span><br><span class="line">                ./src/lib/data_utils.cpp</span><br><span class="line">                ./src/lib/test_data_utils.cpp</span><br><span class="line">                ./src/lib/punctuation_model.cpp  </span><br><span class="line">                ./src/lib/punctuation_service.cpp      </span><br><span class="line">                ./src/lib/beam_search_ops.cc</span><br><span class="line">                ./src/lib/beam_search_ops_gpu.cu.cc</span><br><span class="line">                ./src/lib/segmenter.cpp</span><br><span class="line">                ./src/lib/usefultools.cpp </span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">SET(jsoncpp_sources            </span><br><span class="line">                ./src/lib/json_reader.cpp</span><br><span class="line">                ./src/lib/json_value.cpp</span><br><span class="line">                ./src/lib/json_writer.cpp</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line"># PROJECT_SOURCE_DIR 是自动的, 表示项目的home目录, link_directories 指定要链接的库文件的路径</span><br><span class="line">link_directories($&#123;PROJECT_SOURCE_DIR&#125;/3rdparty)</span><br><span class="line"></span><br><span class="line">set(CODE_DIRS $&#123;PROJECT_SOURCE_DIR&#125;/src)</span><br><span class="line"></span><br><span class="line">set(SOURCE_DIR $&#123;CODE_DIRS&#125;/lib)</span><br><span class="line">set(TEST_DIR $&#123;CODE_DIRS&#125;/test)</span><br><span class="line"></span><br><span class="line">#EXECUTABLE_OUTPUT_PATH  和 LIBRARY_OUTPUT_PATH 是cmake的常量，表示输出的lib和bin的目录，这里控制输出的路径</span><br><span class="line">set(EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/bin)</span><br><span class="line">set(LIBRARY_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/lib)</span><br><span class="line"></span><br><span class="line">#add_subdirectory($&#123;SOURCE_DIR&#125; $&#123;LIBRARY_OUTPUT_PATH&#125;)</span><br><span class="line">#add_subdirectory($&#123;TEST_DIR&#125; $&#123;EXECUTABLE_OUTPUT_PATH&#125;)</span><br><span class="line"></span><br><span class="line"># 创建一个共享的库文件，运行时动态链接，还有STATIC，MODULE两种选项，分别表示静态库和模块库</span><br><span class="line">add_library(punctuation_lib SHARED</span><br><span class="line">    $&#123;asm_sources&#125;</span><br><span class="line">    $&#123;jsoncpp_sources&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为punctuation_lib指定类库，也就是为库文件指定include目录， </span><br><span class="line">target_include_directories(punctuation_lib PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 为指定的类库文件指定它的依赖</span><br><span class="line">target_link_libraries(punctuation_lib </span><br><span class="line">    libtensorflow_framework.so </span><br><span class="line">    libtensorflow_cc.so</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建一个可执行的文件，指定它的源码文件, 也就是下面几行都是设置test文件</span><br><span class="line">add_executable(test_tf $&#123;TEST_DIR&#125;/test.cpp)</span><br><span class="line">target_include_directories(test_tf PUBLIC</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/tensorflow/ </span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/nsync/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/absl/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/include/eigen/</span><br><span class="line">    $&#123;PROJECT_SOURCE_DIR&#125;/src/include</span><br><span class="line">    $&#123;PATH_INCLUDE_DIR&#125;</span><br><span class="line">)</span><br><span class="line">target_link_libraries(test_tf </span><br><span class="line">    punctuation_lib</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#获取rpc-framework-cpp 的代码</span><br><span class="line">if(EXISTS &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot; AND IS_DIRECTORY &quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp&quot;)</span><br><span class="line">    message(STATUS &quot;dependency grpc already exits&quot;)</span><br><span class="line">else()</span><br><span class="line">    execute_process(COMMAND git clone -b v0.1.3-protobuf3.7 https://his_group:Aispeech_hisgroup@git.aispeech.com.cn/his-rpc/rpc-framework-cpp.git $&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/rpc-framework-cpp)</span><br><span class="line">endif()</span><br><span class="line">include(./rpc-framework-cpp/CMakeLists.txt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 正式的可执行文件, 也就是每个可执行文件 都有 add_executable/target_include_directories/target_link_libraries 三个步骤,</span><br><span class="line"># 指定include文件和类库，源码文件，比如 target_link_libraries 指定了两个类库，分别由RPC_LIBS和punctuation_lib指定</span><br><span class="line"># 而punctuation_lib是类库，在上面有设置，而RPC_SRC则分别由set(RPC_LIBS event), set(RPC_LIBS $&#123;RPC_LIBS&#125; protobuf grpc++_unsecure gpr) 指定</span><br><span class="line">add_executable(rpcserver rpcserver.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">target_include_directories(rpcserver PUBLIC $&#123;RPC_INCLUDES&#125; $&#123;PROJECT_SOURCE_DIR&#125;/src/include)</span><br><span class="line">target_link_libraries(rpcserver $&#123;RPC_LIBS&#125; punctuation_lib)</span><br><span class="line">#add_executable(rpcclient rpcclient.cpp $&#123;RPC_SRC&#125;)</span><br><span class="line">#target_link_libraries(rpcclient  $&#123;RPC_LIBS&#125;)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1469,137 +1591,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/08/08/讨论感情/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Valar morghulis">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/08/讨论感情/" itemprop="url">讨论感情</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-08T20:49:16+08:00">
-                2019-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近讨论感情有点多，大概大家都到了时间，都在思考这个问题，一个家伙居然把对我宣讲的话写到了自己日记里，fuck，那为什么不写上我回复的内容呢。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单身的人常常希望早点告别单身，但找到琴瑟相合的伴侣却并不容易。上周和朋友们聚餐，我对一位单身的朋友说，不要怀着试错的态度去接触女生，要试对，一旦看到你要找的人，你要不惜一切代价追上去。一旦按照概率思维去试错，一方面消耗大量精力，却徒劳，另一方面当对的人出现的时候，你没有all in的精气神了，那才是让人遗憾的事情。记得冰心对铁凝说，你不要找，你要等。我想她说的就是这个意思吧。</span><br></pre></td></tr></table></figure>
-
-<p>既然提到了概率，听说学术圈关于这个还真有讨论，这种理论可以用到各个方面，比如面试，比如砍价。因为并不了解市场, 又不想轻率的下结论，具体操作是这样, 先去前30%的公司去面试，了解情况，但是前30%个无论怎么样，都不下结论，全拒，然后从剩余的70%中寻找比30%更好的，取第一个更好的，这样得到最好的机会是最大的，具体证明, 略^ _ ^</p>
-<p>我是不信这套理论的，哈哈。感情不是概率游戏，人不是数字，人是变的，尤其是感情里面，把人当成数字，会失去对人的尊重，而在两个人的感情中，尊重是很重要的，遇到了自己想要的，那就停下来，用心去经营。all in，我的解读就是全身心的投入到这份感情里面，去感受每一个细节，把自己的思念和期待，经营感情，在我看来就是过好生活，有一些甜蜜和温馨，有一个共同认可的方向，坦荡尊重，没有什么花招，大工不巧。</p>
-<p>人无法欺骗自己，勉强自己接受一段感情，早晚会有那么几个瞬间，会开始反思，开始怀疑，开始后悔，开始控制不住自己，这是很可怕的，会毁了生活。“纵然举案齐眉，到底意难平”。 </p>
-<p>我一直都知道自己想要的什么，这些年过去了，我一直在思考，我念念不忘的初恋女孩是初恋情结，还是那就是我想要的。每一次，答案都是：她就是我想要的。我愿意为了这么样的一个人，放弃其他一切幻想，永远停留在与她的世界里。 而我的问题在于，我能否配的上人家，自己的期望和自己能配的上之间的差距有多大，是一个现实的问题。</p>
-<p>我还在等自己想要的人，我坚信自己能遇到，我并不着急，我还有很多事情要做，世界还在等着我去探索。我知道自己最近关于找对象的事情，有点积极，请了很多朋友帮忙介绍，也尝试了一些互联网的平台，可是我并不着急，也许这些尝试有用吧，也许这些尝试没用吧，总之最后我能得到真爱，我相信真爱。</p>
-<p>一个朋友，嘲讽我说“你好少男啊”, 哈哈，回：“愿你走出半生，归来仍是少年”。 这些年，也算见过一些阴暗面，少男的评价，我可是拒绝的。希望这位没有安全感，害怕背叛的朋友能放下心结，迎接未来的幸福。</p>
-<p>有两种真爱。就像教父中第二代教父迈克尔一样，一种真爱就像他第一任妻子之于他一样，一种真爱就像他第二任妻子之于他一样，两种不同的感情，一种更偏理性，一种更偏感性。迈克尔见到阿波罗尼亚的时候，就像触碰了闪电一样，忘记了这个世界，然后就去提亲了。一种就像恺.亚当和他一样, 我想着你，我喜欢你，但是没有到无法自拔的地步，我对这个未来有着担心和期待，你来找我的时候，如果你还想的话，如果你知道自己面临的是什么的话，我愿意给你你想要的一切，我愿意给你我能提供的一切。</p>
-<p>始于颜值，陷于才华，终于人品，我坚信恺.亚当才可能是未来，阿波萝妮亚虽然一见钟情，但是一旦遇到各种问题之后，这段感情如何继续呢？迈克尔的控制欲已经成了隐患。风花雪月之后，始终是柴米油盐。我期待中懂事的女孩，能理解人，能保持沟通和对话，不纠结琐事，不迷茫未来。</p>
-<p>坚信真爱，不期待，不失望，经营好自己的生活</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1650,7 +1641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

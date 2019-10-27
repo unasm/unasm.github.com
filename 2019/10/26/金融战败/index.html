@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算机, C++,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="类gdb 的写法123456781. file a.out	                # 载入可执行文件2. b main			# 在main处break3. run				# 启动程序4. bt				# backtrace ，显示调用栈5. step			        # 进入方法6. print argc 	                # 输出参数7. next 			# 下一步">
-<meta name="keywords" content="计算机, C++">
+<meta name="description" content="这本书是日本作家吉川元中作的，介绍了日本广场协议前后的情况，我对那段历史很感兴趣，看之前，我觉得如果贸易战战败的话，中国大概就是日本的样子，所谓失落的十年，不过，看着看着，我觉得不太一样。 虽说名字是《金融战败》, 实际上，我不觉得有战的过程，美国人是否包藏祸心，打击日本，不得而知，不过，这个确实是谈出来的。而且就初期而言，也有着相当的你情我愿。 冷战期间，为了维持美元的强势地位(这就是美联储的目">
+<meta name="keywords" content="人工智能，生活随想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lldb 常用命令">
-<meta property="og:url" content="http://unasm.com/2019/07/14/lldb-常用命令/index.html">
+<meta property="og:title" content="金融战败">
+<meta property="og:url" content="http://unasm.com/2019/10/26/金融战败/index.html">
 <meta property="og:site_name" content="Valar morghulis">
-<meta property="og:description" content="类gdb 的写法123456781. file a.out	                # 载入可执行文件2. b main			# 在main处break3. run				# 启动程序4. bt				# backtrace ，显示调用栈5. step			        # 进入方法6. print argc 	                # 输出参数7. next 			# 下一步">
+<meta property="og:description" content="这本书是日本作家吉川元中作的，介绍了日本广场协议前后的情况，我对那段历史很感兴趣，看之前，我觉得如果贸易战战败的话，中国大概就是日本的样子，所谓失落的十年，不过，看着看着，我觉得不太一样。 虽说名字是《金融战败》, 实际上，我不觉得有战的过程，美国人是否包藏祸心，打击日本，不得而知，不过，这个确实是谈出来的。而且就初期而言，也有着相当的你情我愿。 冷战期间，为了维持美元的强势地位(这就是美联储的目">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-23T13:43:05.920Z">
+<meta property="og:updated_time" content="2019-10-27T05:54:47.877Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lldb 常用命令">
-<meta name="twitter:description" content="类gdb 的写法123456781. file a.out	                # 载入可执行文件2. b main			# 在main处break3. run				# 启动程序4. bt				# backtrace ，显示调用栈5. step			        # 进入方法6. print argc 	                # 输出参数7. next 			# 下一步">
+<meta name="twitter:title" content="金融战败">
+<meta name="twitter:description" content="这本书是日本作家吉川元中作的，介绍了日本广场协议前后的情况，我对那段历史很感兴趣，看之前，我觉得如果贸易战战败的话，中国大概就是日本的样子，所谓失落的十年，不过，看着看着，我觉得不太一样。 虽说名字是《金融战败》, 实际上，我不觉得有战的过程，美国人是否包藏祸心，打击日本，不得而知，不过，这个确实是谈出来的。而且就初期而言，也有着相当的你情我愿。 冷战期间，为了维持美元的强势地位(这就是美联储的目">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://unasm.com/2019/07/14/lldb-常用命令/">
+  <link rel="canonical" href="http://unasm.com/2019/10/26/金融战败/">
 
 
 
 
 
-  <title>lldb 常用命令 | Valar morghulis</title>
+  <title>金融战败 | Valar morghulis</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/07/14/lldb-常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/10/26/金融战败/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">lldb 常用命令</h1>
+          <h1 class="post-title" itemprop="name headline">金融战败</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-14T18:10:33+08:00">
-                2019-07-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-26T21:41:08+08:00">
+                2019-10-26
               </time>
             
 
@@ -310,17 +310,21 @@
       
 
       
-        <h4 id="类gdb-的写法"><a href="#类gdb-的写法" class="headerlink" title="类gdb 的写法"></a>类gdb 的写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. file a.out	                # 载入可执行文件</span><br><span class="line">2. b main			# 在main处break</span><br><span class="line">3. run				# 启动程序</span><br><span class="line">4. bt				# backtrace ，显示调用栈</span><br><span class="line">5. step			        # 进入方法</span><br><span class="line">6. print argc 	                # 输出参数</span><br><span class="line">7. next 			# 下一步</span><br><span class="line">8. q				# 退出</span><br></pre></td></tr></table></figure>
+        <p>这本书是日本作家吉川元中作的，介绍了日本广场协议前后的情况，我对那段历史很感兴趣，看之前，我觉得如果贸易战战败的话，中国大概就是日本的样子，所谓失落的十年，不过，看着看着，我觉得不太一样。</p>
+<p>虽说名字是《金融战败》, 实际上，我不觉得有战的过程，美国人是否包藏祸心，打击日本，不得而知，不过，这个确实是谈出来的。而且就初期而言，也有着相当的你情我愿。</p>
+<p>冷战期间，为了维持美元的强势地位(这就是美联储的目标？？)，成就强大美国的形象， 以及货币主义者自由理论的影响，美国国债利率居高不下，大量的日元涌入购买国债（参见美联储1980-1984年的政策，不过沃尔克号称只是抑制通货膨胀），成为美元价值最有力的支撑。</p>
+<p>经济繁荣无法掩盖贸易赤字，强势美元造就了企业的衰败，1985年9月，冷战相对缓和，为了解决贸易不平衡问题，五国财长达成了著名的广场协议，美元开始下调汇率贬值，1美元/240日元预期下调到1美元/200日元，然而现实是到1987年2月七国财长会议之后，到了1美元/150日元才告一段落。</p>
+<p>然而贸易不均衡并没有得到很好到改善，美元贬值给非耐用性工业原材料带来了直接的好处，比如纸浆，一次性金属，化学品，纺织品，橡胶等。然而1989年之后，这些企业的出口又开始下降。而进口抑制有增无减，美国出口增加有限原因有几点， 1. 形成萎缩条件的未来不确定性，今天贬值，说不定什么时候升值， 2. 必需的人力，资金资源能否确保，3. 必需的技术水平能否确保。 这几点造就了汇率对贸易的影响不会很快有结果（简单来说，就是他们国家就不生产了，一时半会也不能开工，如果保有相关产业，可能影响就更大一些）。</p>
+<p>美元的跌幅大大超出预期给日本企业带来严重损失，持有资产骤减40%，为了购买美国国债，日本企业经常用短期借贷的资金购买长期国债，由此带来现金流风险，同时贬值页也带来了巨大的亏损（这些企业真惨，国际利差赚不得），美国则大大减轻了债务压力，顺利实现经济的软着陆，自己一身轻松，太不地道了。</p>
+<p>五国财长的协议，日本最惨，是有原因的。日本积极协助美国压力汇率，并且不无得意， 1986年美元大幅度贬值，日本美国利差相差已经不大，日本资金依旧大量购买美国国债，1987年，汇率达到了1美元/120日元，日本资金对美还流终于短暂下降，1988年，1989年又回复如初。据说原因1是大藏省的鼓励或者暗示，原因2是因为泡沫的虚假繁荣。&lt;美元在不断的贬值，却还在不断的购买，中国目前也有类似的举动，是为了实现利益的深度绑定，从而维持自身的安全么？纵容美国的剥削？？但是日本有这种顾虑么？还是政治上的压力？&gt;</p>
+<p>1987年之后，日本利率调整到了2.5%的超低水平，长久的低利率政策，加之为了控制日元升值，日本中央银行大量买入美元卖出日元导致日元供给过剩，过剩的货币被吸引到了房地产和股票市场，形成泡沫（中国股市低迷，我应该开心么？比起来投资股票房地产，购买美债看起来还更靠谱了，不过干嘛不购买英镑马克黄金呢？如果那个时间买入英镑避险，等市场崩溃，资产贬值，再回来收割是不是可以人生巅峰。热钱四溢，出逃才是王道，恭喜美国双杀）</p>
+<p>1987格林斯潘就任美联储主席，美国独自开始提高利率到5.5%～6%。由此引发了黑色星期一华尔街崩盘，日本为了提振市场大举买入。其他国家如联邦德国只是稍微下调了利率，并且于1988年7月调整了上调利率，选择了和美元脱钩。当时的日本丧失了思考。</p>
+<p>日本于1988年开始投资美国的地产，并且大批购买写字楼，宾馆，由此引发了美国的舆论反感，美国开始在银行层面抑制日本，日本的国际融资比例大幅下降。1990年之后近乎于0.</p>
+<p>面对日本极高的房价和股票市场，美国和日本达成《结构协议》，强化了公司间相互持股的限制，为瓦解公司股价奠定了条件，同时鼓吹提高生活质量，增加土地供应，降低房价，对已经放出了巨量贷款的金融机构造成了致命的打击，造成了大量的不良债权，很多民众由此家庭破碎。土地调整的正常界限应该是最高价格的20%-30%，不至于产生不良债券，民众如果仍不满，还可以在经济增长中将高出的部分抵消掉。然而现实是跌破了50%以下，进入了不可收拾的局面。</p>
+<p>总的来说日本成为债权国时，未能建立起与之相适应的金融经济结构，过分忠于华尔街，以至于形成泡沫，之后又在处理措施上失误(不好说哦，也许是没办法呢)导致了悲剧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">尽管改革严格的外汇管理体制，取消金融的封闭自收不失为长期有效的国策，但却意味着日本的金融机构丧失既得利益，日本的大藏省会因此丧失在金融界中的影响力</span><br></pre></td></tr></table></figure>
 
-<h4 id="lldb的写法-括号内是缩写"><a href="#lldb的写法-括号内是缩写" class="headerlink" title="lldb的写法(括号内是缩写)"></a>lldb的写法(括号内是缩写)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. target create a.out	( tc a.out)			# 载入可执行文件</span><br><span class="line">2. breakpoint set --name main	(br s --name main)      # 在main方法处设置断点</span><br><span class="line">3. process launch (pro la)				# 启动程序</span><br><span class="line">4. thread backtrace					# 打印线程调用栈</span><br><span class="line">5. thread step-in (th step-in)			        # 进入方法</span><br><span class="line">6. expression argc	(p argc)			# 打印变量</span><br><span class="line">7. thread step-over (th step-over)			# 下一步</span><br><span class="line">8. quit (q)					        # 退出</span><br></pre></td></tr></table></figure>
-
-<p>能看出来，感觉lldb原生的命令，还是更啰嗦的，不过格式也更清晰 [noun] [verb] [options] [argument]<br>lldb 支持tab，可以输入target 然后按table 会自动补全，这是一个有意思的feature。</p>
-<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><ol>
-<li>gui 也是一个很有意思的命令，显示一个IDE的终端界面，只能看，不能操作，操作还是要回到命令行的</li>
-<li>apropos 增强版的help，apropos frame 可以显示和frame 相关的命令，以及具体作用</li>
-<li>expression 支持多行写法，先输入expression，然后就可以输入 空行，就可以开始执行语句</li>
-<li>target modules lookup –address 0x00000, 查看一个地址的代码，用于代码crash确认代码</li>
-</ol>
+<p>（无语，改革就会丧失影响力，政府是吃软饭的么？这就是自由的味道么？）</p>
 
       
     </div>
@@ -336,12 +340,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/计算机-C/" rel="tag"># 计算机, C++</a>
-          
-        </div>
-      
 
       
       
@@ -351,8 +349,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/11/spark-get-json-object的使用方式/" rel="next" title="spark get_json_object的使用方式">
-                <i class="fa fa-chevron-left"></i> spark get_json_object的使用方式
+              <a href="/2019/10/26/读货币战争有感/" rel="next" title="读货币战争有感">
+                <i class="fa fa-chevron-left"></i> 读货币战争有感
               </a>
             
           </div>
@@ -360,10 +358,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/23/给自己找对象/" rel="prev" title="给自己实例化对象">
-                给自己实例化对象 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -415,17 +409,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -476,22 +461,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类gdb-的写法"><span class="nav-number">1.</span> <span class="nav-text">类gdb 的写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lldb的写法-括号内是缩写"><span class="nav-number">2.</span> <span class="nav-text">lldb的写法(括号内是缩写)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他命令"><span class="nav-number">3.</span> <span class="nav-text">其他命令</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

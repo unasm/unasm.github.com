@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1 保证稳定性和兼容性1.1 保持与C99兼容(STDCHOSTED_, STDC, STDCVERSION__)1.1.1 C99中的预定义宏1.1.2 func预定义标识符1.1.3 _Pragma操作符1.1.4 不定参数宏定义以及 __VA_ARGS1.1.5 宽窄字符串链接1.2 long long 整型1.3 扩展整型（signed char, short int, int, long">
+<meta name="keywords" content="人工智能，生活随想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解C++ 11">
+<meta property="og:url" content="http://unasm.com/2019/12/15/深入理解C-11/index.html">
+<meta property="og:site_name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
+<meta property="og:description" content="1 保证稳定性和兼容性1.1 保持与C99兼容(STDCHOSTED_, STDC, STDCVERSION__)1.1.1 C99中的预定义宏1.1.2 func预定义标识符1.1.3 _Pragma操作符1.1.4 不定参数宏定义以及 __VA_ARGS1.1.5 宽窄字符串链接1.2 long long 整型1.3 扩展整型（signed char, short int, int, long">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-12T16:45:42.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解C++ 11">
+<meta name="twitter:description" content="1 保证稳定性和兼容性1.1 保持与C99兼容(STDCHOSTED_, STDC, STDCVERSION__)1.1.1 C99中的预定义宏1.1.2 func预定义标识符1.1.3 _Pragma操作符1.1.4 不定参数宏定义以及 __VA_ARGS1.1.5 宽窄字符串链接1.2 long long 整型1.3 扩展整型（signed char, short int, int, long">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://unasm.com/2019/12/15/深入理解C-11/">
+
+
+
+
+
+  <title>深入理解C++ 11 | 无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/12/15/深入理解C-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解C++ 11</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-15T22:14:49+08:00">
+                2019-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-保证稳定性和兼容性"><a href="#1-保证稳定性和兼容性" class="headerlink" title="1 保证稳定性和兼容性"></a>1 保证稳定性和兼容性</h4><h5 id="1-1-保持与C99兼容-STDCHOSTED-STDC-STDCVERSION"><a href="#1-1-保持与C99兼容-STDCHOSTED-STDC-STDCVERSION" class="headerlink" title="1.1 保持与C99兼容(STDCHOSTED_, STDC, STDCVERSION__)"></a>1.1 保持与C99兼容(<strong>STDC</strong>HOSTED_, <strong>STDC</strong>, <strong>STDC</strong>VERSION__)</h5><h6 id="1-1-1-C99中的预定义宏"><a href="#1-1-1-C99中的预定义宏" class="headerlink" title="1.1.1 C99中的预定义宏"></a>1.1.1 C99中的预定义宏</h6><h6 id="1-1-2-func预定义标识符"><a href="#1-1-2-func预定义标识符" class="headerlink" title="1.1.2 func预定义标识符"></a>1.1.2 <strong>func</strong>预定义标识符</h6><h6 id="1-1-3-Pragma操作符"><a href="#1-1-3-Pragma操作符" class="headerlink" title="1.1.3 _Pragma操作符"></a>1.1.3 _Pragma操作符</h6><h6 id="1-1-4-不定参数宏定义以及-VA-ARGS"><a href="#1-1-4-不定参数宏定义以及-VA-ARGS" class="headerlink" title="1.1.4 不定参数宏定义以及 __VA_ARGS"></a>1.1.4 不定参数宏定义以及 __VA_ARGS</h6><h6 id="1-1-5-宽窄字符串链接"><a href="#1-1-5-宽窄字符串链接" class="headerlink" title="1.1.5 宽窄字符串链接"></a>1.1.5 宽窄字符串链接</h6><h5 id="1-2-long-long-整型"><a href="#1-2-long-long-整型" class="headerlink" title="1.2 long long 整型"></a>1.2 long long 整型</h5><h5 id="1-3-扩展整型（signed-char-short-int-int-long-int-long-long-int）"><a href="#1-3-扩展整型（signed-char-short-int-int-long-int-long-long-int）" class="headerlink" title="1.3 扩展整型（signed char, short int, int, long int, long long int）"></a>1.3 扩展整型（signed char, short int, int, long int, long long int）</h5><h5 id="1-4-宏-cplusplus-用于C和C-混合编写"><a href="#1-4-宏-cplusplus-用于C和C-混合编写" class="headerlink" title="1.4 宏 __cplusplus 用于C和C++混合编写"></a>1.4 宏 __cplusplus 用于C和C++混合编写</h5><h5 id="1-5-静态断言"><a href="#1-5-静态断言" class="headerlink" title="1.5 静态断言"></a>1.5 静态断言</h5><p>  断言有助于快速定位违反了某些前提条件的程序错误, assert 只能在程序运行的时候才起作用。static_assert用于编译时候用的断言。</p>
+<h5 id="1-6-noexcept-修饰符和-noexcept-操作符"><a href="#1-6-noexcept-修饰符和-noexcept-操作符" class="headerlink" title="1.6 noexcept 修饰符和 noexcept 操作符"></a>1.6 noexcept 修饰符和 noexcept 操作符</h5><p>  noexcept 表示修饰的函数不会抛出异常，如果抛出了异常，编译器直接调用std::terminate()终止运行。</p>
+<h5 id="1-7-快速初始化成员变量"><a href="#1-7-快速初始化成员变量" class="headerlink" title="1.7 快速初始化成员变量"></a>1.7 快速初始化成员变量</h5><p>  C++ 11 中，标准允许非静态成员变量的多种初始化形式。具体而言，除了初始化列表之外, 还允许使用等号=或者{}进行就地的非静态成员变量的初始化, 通过花括号式的集合初始化列表。</p>
+<h5 id="1-8-非静态成员的sizeof"><a href="#1-8-非静态成员的sizeof" class="headerlink" title="1.8 非静态成员的sizeof"></a>1.8 非静态成员的sizeof</h5><p>  struct People {<br>    public:<br>      int hand;<br>      static People *all;<br>  }<br>  支持 sizeof(People::hand), sizeof(People::all), sizeof((new People()).hand)</p>
+<h5 id="1-9-friend-友元"><a href="#1-9-friend-友元" class="headerlink" title="1.9 friend 友元"></a>1.9 friend 友元</h5><p>  可以无视 public, protected, private的属性，友元类或者友元函数都可以访问</p>
+<h5 id="1-10-final-override-控制"><a href="#1-10-final-override-控制" class="headerlink" title="1.10 final/override 控制"></a>1.10 final/override 控制</h5><p>  final 关键字用于阻止函数继续重写，使派生类不可覆盖它所修改的虚函数。<br>  如果派生类在虚函数声明时使用了virtual描述符，那么该函数就必须 override 重载基类中的同名函数，否则代码无法编译通过。</p>
+<h5 id="1-11-函数模板的默认模板参数"><a href="#1-11-函数模板的默认模板参数" class="headerlink" title="1.11 函数模板的默认模板参数"></a>1.11 函数模板的默认模板参数</h5><p>  template <typename t="int"> class DefClass{}; int 就是默认参数<br>  template &lt;typename T, int i = 0&gt; class DefClass{}; int 就是默认参数<br>  为多个模板参数指定默认值时候，必须遵照从右到左的规定指定</typename></p>
+<h5 id="1-12-外部模板"><a href="#1-12-外部模板" class="headerlink" title="1.12 外部模板"></a>1.12 外部模板</h5><p>  声明：extern templat void fun<int>(int), 使用extern声明，不会再实例化代码，而是引用外部的模板声明。也可以把外部模板声明放在头文件中，这样所有包含test.h的头文件中就可以共享这个外部模板声明了。就好比全局变量的定义，外部声明和使用。</int></p>
+<h5 id="1-13-局部匿名类型作为模板实参"><a href="#1-13-局部匿名类型作为模板实参" class="headerlink" title="1.13 局部匿名类型作为模板实参"></a>1.13 局部匿名类型作为模板实参</h5><p>  可以使用局部的结构体，变量，匿名的结构体和变量 传递给 模板类和模板函数</p>
+<h4 id="2-通用为本，专用为末"><a href="#2-通用为本，专用为末" class="headerlink" title="2. 通用为本，专用为末"></a>2. 通用为本，专用为末</h4><h5 id="2-1-继承构造函数"><a href="#2-1-继承构造函数" class="headerlink" title="2.1 继承构造函数"></a>2.1 继承构造函数</h5><p>  可以使用 using Base::Base 的方式把基类中的构造函数全部集成到派生类中。也可以通过 using Base::f 的方式，继承某一个具体的方法。在多个基类，继承构造函数冲突的时候，可以通过显示定义构造函数，阻止隐式生成响应的继承构造函数。</p>
+<h5 id="2-2-委托构造函数"><a href="#2-2-委托构造函数" class="headerlink" title="2.2 委托构造函数"></a>2.2 委托构造函数</h5><p>  原则上编译器不允许构造函数中调用构造函数。 Info(char e): Info() { name = ‘e’}, 也就是说，在初始化列表中进行构造，委派。</p>
+<h5 id="2-3-移动语义和完美转发-这块好trick，反正也用不到-有uniptr替代"><a href="#2-3-移动语义和完美转发-这块好trick，反正也用不到-有uniptr替代" class="headerlink" title="2.3 移动语义和完美转发(这块好trick，反正也用不到, 有uniptr替代)"></a>2.3 移动语义和完美转发(这块好trick，反正也用不到, 有uniptr替代)</h5><h6 id="2-3-1-指针成员和拷贝构造"><a href="#2-3-1-指针成员和拷贝构造" class="headerlink" title="2.3.1 指针成员和拷贝构造"></a>2.3.1 指针成员和拷贝构造</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class HasPtrMem &#123;</span><br><span class="line">  public:</span><br><span class="line">    HasPtrMem(): d(new int(0)) &#123;&#125;</span><br><span class="line">    HasPtrMem(const HasPtrMem &amp; h): d(new int(*h.d)) &#123;&#125;</span><br><span class="line">    ~HasPtrMem() &#123;</span><br><span class="line">      delete d;</span><br><span class="line">    &#125;</span><br><span class="line">    int * d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HashPtrMem a; HasPtrMem b(a); a.d 和 b.d 都指向了同一个内存，C++中被称为浅拷贝。</p>
+<p>解决办法就是 去掉构造函数中的 const(关于这块，要继续了解const的作用, 正常操作，好像也不会加const吧)</p>
+<h6 id="2-3-2-移动语义"><a href="#2-3-2-移动语义" class="headerlink" title="2.3.2 移动语义"></a>2.3.2 移动语义</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class HasPtrMem &#123;</span><br><span class="line">  public:</span><br><span class="line">  HasPtrMem(): d(new int(3)) &#123;&#125;</span><br><span class="line">  HasPtrMem(const HasPtrMem &amp;h): d(new int(*h.d)) &#123;&#125;  // 注意这里还是const，也就是还是原来的内存，并没有新new</span><br><span class="line">  HasPtrMem(HasPtrMem &amp;&amp; h) d(h.d) &#123;    // 移动构造函数</span><br><span class="line">    h.d = nullptr;                      // 将临时值的指针成员置空</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为移动构造完成之后，临时对象会立刻被析构，如果不改变 h.d，析构函数 会析构掉我们本来偷来的堆内存(那如果a = b的时候，也会发生移动构造吧，b的内存会被偷走，也就是说，这里其实也是坑)。</p>
+<h6 id="2-3-3-左值，右值，和右值引用"><a href="#2-3-3-左值，右值，和右值引用" class="headerlink" title="2.3.3 左值，右值，和右值引用"></a>2.3.3 左值，右值，和右值引用</h6><ol>
+<li>可以取地址的，有名字的，就是左值，不能取地址的，没有名字的，就是右值。</li>
+<li>T &amp;&amp; a = ReturnValue(), ReturnValue 本来在返回右值之后，就将析构，而通过右值引用，有重获新生，生命周期将与a一样</li>
+<li>T    b = ReturnValue(), b 只是由临时值构成的，而临时值在表示式结束之后，会多一次析构和构造的开销</li>
+<li>右值引用不能绑定到任何的左值的。</li>
+<li>常量左值引用是一个万能的引用类型，可以接受常量左值，非常量左值，右值进行初始化，但是其引用的右值在余生中只能是只读的。可以使用常量左值引用来减少临时变量的开销。</li>
+<li>std::move的作用，把一个左值强制成为右值, Copyable news = std::move(s), 如果s中包含一些一些大块内存指针，news 就可以把内存窃为己有(s自身不可以再使用)</li>
+</ol>
+<h6 id="2-3-5-移动语义的一些问题"><a href="#2-3-5-移动语义的一些问题" class="headerlink" title="2.3.5 移动语义的一些问题"></a>2.3.5 移动语义的一些问题</h6><p>  通常情况下，如果需要移动语义，程序员就小自己定义移动构造函数</p>
+<h6 id="2-3-6-完美转发"><a href="#2-3-6-完美转发" class="headerlink" title="2.3.6 完美转发"></a>2.3.6 完美转发</h6><p>  完美转发是指：函数模板中，完全依照模板的参数类型，将参数传递给函数模板调用的另一个函数，比如 template<typename t> void IamForwarding(T t) {IrunCodeActually(t)}, 这里产生了额外的对象拷贝，如果用常量左值(const T &amp; t)来，则可能有无法接受常量左值的函数存在<br>  template<typename t> void PerfectForward(T &amp;&amp; t) { RunCode(forward<t>(t))}</t></typename></typename></p>
+<h5 id="2-4-显式转换操作符"><a href="#2-4-显式转换操作符" class="headerlink" title="2.4 显式转换操作符"></a>2.4 显式转换操作符</h5><p>  explicit 禁止隐式转换</p>
+<h5 id="2-5-列表初始化"><a href="#2-5-列表初始化" class="headerlink" title="2.5 列表初始化"></a>2.5 列表初始化</h5><ol>
+<li>int a[] = {1, 2,3}</li>
+<li>int b[] {1, 2, 3}</li>
+<li>vector<int>c {1, 2, 3}</int></li>
+<li>可以通过 initializer_list使自定义的类使用列表初始化</li>
+<li>POD 类型， Plain Old Data，平凡数据，默认的构造函数，析构函数，默认的拷贝构造和移动构造函数，拷贝赋值运算符和移动赋值运算符，没有虚函数和虚基类，标准布局，没有privat</li>
+<li>内联名字空间 允许在父空间定义或者特化子空间名字的模板, inline 相当于 将名字空间导入到父空间中</li>
+<li>可以用typedef 和 using 来定义模板和域的别名， using uint = unsigned int;</li>
+</ol>
+<h4 id="3-新手易学，老兵易用"><a href="#3-新手易学，老兵易用" class="headerlink" title="3 新手易学，老兵易用"></a>3 新手易学，老兵易用</h4><h5 id="3-1-右尖括号-gt-的改进"><a href="#3-1-右尖括号-gt-的改进" class="headerlink" title="3.1 右尖括号 &gt; 的改进"></a>3.1 右尖括号 &gt; 的改进</h5><p>  C++98中，如果实例化模板的时候，出现了连续两个 &gt;， 中间应该用空格隔开，以免编译错误，C++ 11 会要求编译器智能的判断哪些情况下&gt;&gt;不是右移符号。 X&lt; 1&gt;&gt; 5&gt;x, C++98中， 会认为 &gt;&gt; 是位移符号，最终得到 X&lt;0&gt;x, 而在C++ 11中会得到一个编译错误的警告，将第一个&gt; 与 X之后的&lt;匹配， 可以通过将 1 &gt;&gt; 5括起来</p>
+<h5 id="3-2-auto类型推导"><a href="#3-2-auto类型推导" class="headerlink" title="3.2 auto类型推导"></a>3.2 auto类型推导</h5><p>  auto声明变量的类型，必须由编译器在编译时期推导而得，可以将复杂的变量声明简化，增加可读性（存疑，理解代码时候，需要自己推导类型），能够自适应，一定程度上支持泛型的编程。</p>
+<ol>
+<li>auto 并不能从初始表达式中保留CV限制符</li>
+<li>auto 并不能作为形参</li>
+<li>auto i = 1, j = 4.13f, 编译失败， auto 从左到右推导 i 为int 所以j 也定义为int，标准称：auto是将要被推导出的类型的占位符。</li>
+<li>对结构体来说，非静态成员的类型不能是auto，不能声明auto 数组</li>
+<li>不能实例化时候，使用auto作为模板参数 </li>
+</ol>
+<h5 id="3-3-typeid-与-decltype"><a href="#3-3-typeid-与-decltype" class="headerlink" title="3.3 typeid 与 decltype"></a>3.3 typeid 与 decltype</h5><h6 id="3-3-1-RTTI，运行时类型识别"><a href="#3-3-1-RTTI，运行时类型识别" class="headerlink" title="3.3.1 RTTI，运行时类型识别"></a>3.3.1 RTTI，运行时类型识别</h6><p>  在C++11中，增加了 hash_code,返回该类型唯一的哈希值，以供程序员对变量的类型随时进行比较。（(typeid(a).hash_code() == typeid(c).hash_code())，RTTI会带来运行时的开销，所以一些编译器会选择性的关闭该特性。</p>
+<h6 id="3-3-3-decltype-推导四原则"><a href="#3-3-3-decltype-推导四原则" class="headerlink" title="3.3.3 decltype 推导四原则"></a>3.3.3 decltype 推导四原则</h6><ol>
+<li>如果e是一个没带括号的标记符表达式，或者类成员访问表达式，那么decltype(e) 就是e所命名的实体的类型，如果e是一个被重载的函数，会导致编译时错误</li>
+<li>如果e的类型是T，如果e是一个讲亡值，那么decltype(e)为T&amp;&amp;</li>
+<li>如果e的类型是T，如果e是一个左值，则decltype(e)为T&amp;</li>
+<li>如果e的类型是T，则decltype(e)为T<h6 id="3-3-4-如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符"><a href="#3-3-4-如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符" class="headerlink" title="3.3.4 如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符"></a>3.3.4 如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符</h6><h6 id="3-5-基于范围的for循环"><a href="#3-5-基于范围的for循环" class="headerlink" title="3.5 基于范围的for循环"></a>3.5 基于范围的for循环</h6>for_each(arr, arr + sizeof(arr) / sizeof(arr[0]), action1)<br>for (int &amp; a: arr) {}<br>如果迭代变量在循环中不会被修改，完全可以不用引用的方式来做迭代变量</li>
+</ol>
+<h4 id="4-提高类型安全"><a href="#4-提高类型安全" class="headerlink" title="4.  提高类型安全"></a>4.  提高类型安全</h4><h5 id="4-1-强枚举类型-enum-class-Type"><a href="#4-1-强枚举类型-enum-class-Type" class="headerlink" title="4.1 强枚举类型 enum class Type"></a>4.1 强枚举类型 enum class Type</h5><ol>
+<li>强作用域，不会被输出到父空间作用域</li>
+<li>转换限制，不可以与整型隐式的互相转换</li>
+</ol>
+<h5 id="4-2-智能指针和垃圾回收"><a href="#4-2-智能指针和垃圾回收" class="headerlink" title="4.2 智能指针和垃圾回收"></a>4.2 智能指针和垃圾回收</h5><ol>
+<li>unique_ptr 与所指对象的内存紧密绑定，不能与其他unique_ptr类型的指针共享所指的内存，所有权仅能通过move来转移，一旦转移成功，原来的unique_ptr就失去了对象内存的所有权。</li>
+<li>shared_ptr 允许多个智能指针共享的拥有同一内存， 调用reset只会降低引用计数，而不会释放，只有在引用计数为0的时候，才会释放所占的堆内存的空间。</li>
+<li>weak_ptr 可以指向shared_ptr指针所指向内存，而不拥有该内存，使用lock可以返回其指向内存的shared_ptr对象，如果堆存对象无效的时候，返回空指针。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/亲密关系/" rel="next" title="亲密关系">
+                <i class="fa fa-chevron-left"></i> 亲密关系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">You're waiting for a train<br>A train that will take you far away<br>You know where you hope will be taken<br>But you can't know for sure<br>Yet it doesn't matter<br>Because we are staying together</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-保证稳定性和兼容性"><span class="nav-number">1.</span> <span class="nav-text">1 保证稳定性和兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-保持与C99兼容-STDCHOSTED-STDC-STDCVERSION"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 保持与C99兼容(STDCHOSTED_, STDC, STDCVERSION__)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-1-C99中的预定义宏"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 C99中的预定义宏</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-2-func预定义标识符"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 func预定义标识符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-3-Pragma操作符"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3 _Pragma操作符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-4-不定参数宏定义以及-VA-ARGS"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.1.4 不定参数宏定义以及 __VA_ARGS</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-5-宽窄字符串链接"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.1.5 宽窄字符串链接</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-long-long-整型"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 long long 整型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-扩展整型（signed-char-short-int-int-long-int-long-long-int）"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 扩展整型（signed char, short int, int, long int, long long int）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-宏-cplusplus-用于C和C-混合编写"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 宏 __cplusplus 用于C和C++混合编写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-静态断言"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 静态断言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-noexcept-修饰符和-noexcept-操作符"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 noexcept 修饰符和 noexcept 操作符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-快速初始化成员变量"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 快速初始化成员变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-非静态成员的sizeof"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 非静态成员的sizeof</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-9-friend-友元"><span class="nav-number">1.9.</span> <span class="nav-text">1.9 friend 友元</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-final-override-控制"><span class="nav-number">1.10.</span> <span class="nav-text">1.10 final/override 控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-函数模板的默认模板参数"><span class="nav-number">1.11.</span> <span class="nav-text">1.11 函数模板的默认模板参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-12-外部模板"><span class="nav-number">1.12.</span> <span class="nav-text">1.12 外部模板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-13-局部匿名类型作为模板实参"><span class="nav-number">1.13.</span> <span class="nav-text">1.13 局部匿名类型作为模板实参</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-通用为本，专用为末"><span class="nav-number">2.</span> <span class="nav-text">2. 通用为本，专用为末</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-继承构造函数"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 继承构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-委托构造函数"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 委托构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-移动语义和完美转发-这块好trick，反正也用不到-有uniptr替代"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 移动语义和完美转发(这块好trick，反正也用不到, 有uniptr替代)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-1-指针成员和拷贝构造"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 指针成员和拷贝构造</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-2-移动语义"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 移动语义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-3-左值，右值，和右值引用"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3 左值，右值，和右值引用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-5-移动语义的一些问题"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.3.5 移动语义的一些问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-6-完美转发"><span class="nav-number">2.3.5.</span> <span class="nav-text">2.3.6 完美转发</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-显式转换操作符"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 显式转换操作符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-列表初始化"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 列表初始化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-新手易学，老兵易用"><span class="nav-number">3.</span> <span class="nav-text">3 新手易学，老兵易用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-右尖括号-gt-的改进"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 右尖括号 &gt; 的改进</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-auto类型推导"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 auto类型推导</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-typeid-与-decltype"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 typeid 与 decltype</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-1-RTTI，运行时类型识别"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 RTTI，运行时类型识别</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-3-decltype-推导四原则"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.3 decltype 推导四原则</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-4-如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3.4 如果对象的定义中有const或者volatile限制符，使用decltype进行推导时，其成员（结构体内部变量）不会继承const或volatile限制符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-5-基于范围的for循环"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.5 基于范围的for循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-提高类型安全"><span class="nav-number">4.</span> <span class="nav-text">4.  提高类型安全</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-强枚举类型-enum-class-Type"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 强枚举类型 enum class Type</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-智能指针和垃圾回收"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 智能指针和垃圾回收</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

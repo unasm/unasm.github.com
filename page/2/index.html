@@ -243,6 +243,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/28/祖传代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/28/祖传代码/" itemprop="url">祖传代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-28T18:47:48+08:00">
+                2019-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是一份可以传给我孙子的代码，记录了libevent事件调度和socket网络编程中端口监听的部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;unordered_map&gt;</span><br><span class="line">#include&lt;functional&gt;</span><br><span class="line">#ifndef RPC_FRAMEWORK_HEAD</span><br><span class="line">#define RPC_FRAMEWORK_HEAD</span><br><span class="line">#include &quot;rpc_framework.h&quot;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct HttpServiceHandler &#123;</span><br><span class="line">    ServiceConfig serviceConfig;</span><br><span class="line">    std::unordered_map&lt;std::string, std::function&lt;void(std::string &amp;, ServiceConfig &amp;, std::string &amp;, std::vector&lt;uint8_t&gt; *, HttpResponse *)&gt;&gt; actionMap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct HttpServerData &#123;</span><br><span class="line">    std::unordered_map&lt;ServiceConfig, HttpServiceHandler&gt; *serviceHandlermap;</span><br><span class="line">    std::string *httpContext;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TransferServer</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        virtual void start()=0;</span><br><span class="line">        virtual void stop()=0;</span><br><span class="line">        template&lt;typename T, typename... Args&gt;</span><br><span class="line"></span><br><span class="line">        void addMethod(MethodInvoker&lt;T, Args...&gt; &amp;methodInvoker) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        template&lt;typename T&gt;</span><br><span class="line"></span><br><span class="line">        void addMethod(MethodInvoker&lt;T, void&gt; &amp;methodInvoker) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class HttpTransferServer : public TransferServer</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        HttpTransferServer(int serverPort): serverPort(serverPort)&#123;&#125;;</span><br><span class="line">        HttpTransferServer(int serverPort, const std::string &amp;httpContext): serverPort(serverPort), httpContext(httpContext) &#123;&#125;;</span><br><span class="line">        /**</span><br><span class="line">         * 析构函数</span><br><span class="line">         */</span><br><span class="line">        ~HttpTransferServer() &#123;</span><br><span class="line">            // evhttp_free(http)</span><br><span class="line">            // event_base_free(base)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    int bindSocket() &#123;</span><br><span class="line">        int r;</span><br><span class="line">        int nfd;</span><br><span class="line"></span><br><span class="line">        nfd = socket(AF_INET, SOCK_STREAM, 0);</span><br><span class="line">        if (nfd &lt; 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int one = 1;</span><br><span class="line">        r = setsocket(nfd, SOL_SOCKET, SO_REUSEDADDR, (char *)&amp;one, sizeof(int));</span><br><span class="line"></span><br><span class="line">        struct sockaddr_in addr;</span><br><span class="line">        memset(&amp;addr, 0, sizeof(addr));</span><br><span class="line"></span><br><span class="line">        addr.sin_family = AF_INET;</span><br><span class="line">        addr.sin_adrr.s_addr = INADDR_ANY;</span><br><span class="line">        addr.sin_port = htons(servrPort);</span><br><span class="line"></span><br><span class="line">        r = bind(nfd, (struct sockaddr*)&amp;addr, sizeof(addr));</span><br><span class="line">        if (r &lt; 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        r = listen(nfd, 10240);</span><br><span class="line">        if (r &lt; 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int flags;</span><br><span class="line">        if ((flags = fcntl(nfd, F_GETFL, 0)) &lt; 0 || fcntl(nfd, F_SETFL, flags | O_NONBLOCK) &lt; 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return nfd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void start() override &#123;</span><br><span class="line">        int nfd = bindSocket;</span><br><span class="line">        if (nfd &lt; 0) &#123;</span><br><span class="line">            exit(1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        HttpServerData httpServerData;</span><br><span class="line">        httpServerData.serviceHandlermap=&amp;serviceHandlerMap_;</span><br><span class="line">        httpserverData.httpContext=&amp;httpContext;</span><br><span class="line">        int threads = std::thread::hardware_concurrency() * 2;</span><br><span class="line">        struct event_base *base_arr[threads];</span><br><span class="line">        baseGroup = base_arr;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; threads; i++) &#123;</span><br><span class="line">            std::thread t([&amp;]() &#123;</span><br><span class="line">                struct event_base &amp;base = event_init();</span><br><span class="line">                base_arr[i] = base;</span><br><span class="line">                if (base == NULL) &#123;</span><br><span class="line">                    exit(1);</span><br><span class="line">                &#125;</span><br><span class="line">                struct evhttp *httpd = evhttp_new(base);</span><br><span class="line">                if (httpd == NULL) &#123;</span><br><span class="line">                    exit(1);</span><br><span class="line">                &#125;</span><br><span class="line">                evhttp_accept_socket(httpd, nfd);</span><br><span class="line">                evhttp_set_gencb(httpd, HttpServicehandler_Impl::service_request_cb, (void *)&amp;httpServerData);</span><br><span class="line">                event_base_dispatch(base);</span><br><span class="line">            &#125;);</span><br><span class="line">            if (i &lt; (threads - 1)) &#123;</span><br><span class="line">                t.deatch();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                t.join();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void stop() override &#123;</span><br><span class="line">        while (baseGroup != NULL) &#123;</span><br><span class="line">            event_base_loopbreak(*baseGroup);</span><br><span class="line">            baseGroup++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        delete this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private:</span><br><span class="line">        std::unordered_map&lt;ServiceConfig, HttpServiceHandler&gt; serviceHandlerMap_;</span><br><span class="line">        struct event_base **baseGroup;</span><br><span class="line">        int serverPort;</span><br><span class="line">        std::string httpContext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/09/27/visual-studio-code-远程调试C-代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1461,137 +1581,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/08/09/2016-乌孙游记-D1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/09/2016-乌孙游记-D1/" itemprop="url">2016 乌孙游记 D1 入山</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-09T00:51:28+08:00">
-                2019-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>早上在酒店的高床软枕赖到11点，期待已久的伟大征程终于要开始了，起床后收拾东西，去下面吃了个饭，剩余的队员马上就到了，大巴也马上就到，12.30左右，出发了。</p>
-<p>弯弯曲曲的山路壮观优美的边疆，草原，羊群，弯曲的白带般的河流，小木屋和牧马人，远远的雪山和白云，真的很漂亮，然后下午四点，到了琼库石台村，乌孙古道的入口，车在森林的入口停下了，河水静静的流出来，两侧是高山，太阳温暖明媚，芳草鲜美，落叶薄盖在上面。稍作休整，两车汇合，就开始了。</p>
-<p><img src="/2019/08/09/2016-乌孙游记-D1/qiongku_shitai.png" alt="琼库石台"></p>
-<p>走几步就是原始森林，真的很原始的森林，满足人一切幻想的森林，参天的松树，青苔长满朽木白色的河水哗啦啦的冲刷着石头，阳光穿过缝隙，撒在草地上，树根盘根错节，到处都是，牧羊人骑着马从我们旁边走过，别扭的说着：你好。沿着峡谷走走走，走走走，走过悬崖，乱石，羊肠小道，木桥和草场，路越走越不平台，雪山也越来越近天色越来越晚，天上的云越来越厚，越来越低，感觉要下雨。</p>
-<p><img src="/2019/08/09/2016-乌孙游记-D1/wusun_path.png" alt="路上风景一览"></p>
-<p>休息中的鱼， 我们亲爱的协作</p>
-<p><img src="/2019/08/09/2016-乌孙游记-D1/wusun_man.png" alt="协作 鱼"></p>
-<p>走过草场之后，细拉拉的开始滴，然后越来越大，众人披雨衣的，穿冲锋衣的，赶快套上，一路不停，大步速走，光线也不好了，也怕淋雨，收起了相机。</p>
-<p><img src="/2019/08/09/2016-乌孙游记-D1/wusun_caoyuan.png" alt="草场"></p>
-<p>走过一个乱石的路，迎面有灯光，两个小木屋，有人在这里扎营，我们也决定扎在旁边，坡度还行，虽然不是很平坦，我们两个赶快扎帐篷，刚刚搞完，天就黑透了，赶快烧火做饭，热水泡囊，榨菜当调料。等水烧开的时候，后续队伍慢慢跟上了，他们好可怜，又黑又冷又饿，营地也不够好了。风大了，只穿了抓绒的我，和只有冲锋衣的仗剑都冻的瑟瑟发抖，盛好饭，我们缩进帐篷里面吃，顿时感觉到了温暖，喝点热汤感觉就是不一样。等我们吃完后，我看到收队走四方在慢慢的搅拌着面条汤，有个帐篷的人还在打火，我们大概是最早吃完的吧。</p>
-<p>话说协作领队们的日子好奢侈，我见到他们喝饮料，还带了花菜和番茄，好像还有酒，我们热水泡馕的情何以堪。但是多一点沉一点，水分多的越少越好，我们是菜鸟，第一次重装走户外，谨慎点，不能像他们那样背。</p>
-<p>滚回自己帐篷，地面冰凉的。铺开防潮垫才感觉到点暖意，脱掉冰冷厚重的登山鞋，脚好受多了，LOWA, 已经最好的徒步鞋了。钻进睡袋，啊…… NEVER BETTER。舒展下身体，躺下来，感觉就像来了天堂，酸痛累的身体解放了，躺进了温暖的睡袋，帐篷外，风在吹。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1642,7 +1631,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1655,7 +1644,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

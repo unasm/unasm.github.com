@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="使用roberta 训练，一个训练2轮，然后在2轮的基础上再训练6轮，也就是一共8轮然后在8404820个数据上去预测结果，其中label 不同的有613706个，在label为1的基础上score 大于0.8的，也就是 两次score 差了至少0.3以上的，有71404，接近1%，有趣的数字，其实根据f1_score，两次相差不过3%左右，但是就细节层面， 标签的变动差别更大，而且就预测效果而已">
-<meta name="keywords" content="机器学习">
+<meta name="description" content="1. 可以使用已经存在的相似模型和数据迅速积累正负样本这有点像迁移学习，使用一个相似的模型，预测一批case，然后人工处理其中一部分score比较高或者低的，这样的话，得到的数据中含有期待的正负样本比例会比较高 2. 自己准备的测试case和最常问的case并不重叠这次本来请标注组准备了不少的测试case，但是发现真正内测的时候，真正问的问题和标注组准备的问题，并不重合，一般人问的都太简单了。 3">
+<meta name="keywords" content="人工智能，生活随想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="epoch 轮数的影响">
-<meta property="og:url" content="http://unasm.com/2021/05/19/epoch-轮数的影响/index.html">
+<meta property="og:title" content="汽车大脑目前学到的有用经验">
+<meta property="og:url" content="http://unasm.com/2021/07/08/汽车大脑目前学到的有用经验/index.html">
 <meta property="og:site_name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
-<meta property="og:description" content="使用roberta 训练，一个训练2轮，然后在2轮的基础上再训练6轮，也就是一共8轮然后在8404820个数据上去预测结果，其中label 不同的有613706个，在label为1的基础上score 大于0.8的，也就是 两次score 差了至少0.3以上的，有71404，接近1%，有趣的数字，其实根据f1_score，两次相差不过3%左右，但是就细节层面， 标签的变动差别更大，而且就预测效果而已">
+<meta property="og:description" content="1. 可以使用已经存在的相似模型和数据迅速积累正负样本这有点像迁移学习，使用一个相似的模型，预测一批case，然后人工处理其中一部分score比较高或者低的，这样的话，得到的数据中含有期待的正负样本比例会比较高 2. 自己准备的测试case和最常问的case并不重叠这次本来请标注组准备了不少的测试case，但是发现真正内测的时候，真正问的问题和标注组准备的问题，并不重合，一般人问的都太简单了。 3">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-05-19T09:58:36.208Z">
+<meta property="og:updated_time" content="2021-07-08T13:56:27.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="epoch 轮数的影响">
-<meta name="twitter:description" content="使用roberta 训练，一个训练2轮，然后在2轮的基础上再训练6轮，也就是一共8轮然后在8404820个数据上去预测结果，其中label 不同的有613706个，在label为1的基础上score 大于0.8的，也就是 两次score 差了至少0.3以上的，有71404，接近1%，有趣的数字，其实根据f1_score，两次相差不过3%左右，但是就细节层面， 标签的变动差别更大，而且就预测效果而已">
+<meta name="twitter:title" content="汽车大脑目前学到的有用经验">
+<meta name="twitter:description" content="1. 可以使用已经存在的相似模型和数据迅速积累正负样本这有点像迁移学习，使用一个相似的模型，预测一批case，然后人工处理其中一部分score比较高或者低的，这样的话，得到的数据中含有期待的正负样本比例会比较高 2. 自己准备的测试case和最常问的case并不重叠这次本来请标注组准备了不少的测试case，但是发现真正内测的时候，真正问的问题和标注组准备的问题，并不重合，一般人问的都太简单了。 3">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://unasm.com/2021/05/19/epoch-轮数的影响/">
+  <link rel="canonical" href="http://unasm.com/2021/07/08/汽车大脑目前学到的有用经验/">
 
 
 
 
 
-  <title>epoch 轮数的影响 | 无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟</title>
+  <title>汽车大脑目前学到的有用经验 | 无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2021/05/19/epoch-轮数的影响/">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2021/07/08/汽车大脑目前学到的有用经验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">epoch 轮数的影响</h1>
+          <h1 class="post-title" itemprop="name headline">汽车大脑目前学到的有用经验</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-19T17:48:37+08:00">
-                2021-05-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-08T21:42:49+08:00">
+                2021-07-08
               </time>
             
 
@@ -310,7 +310,10 @@
       
 
       
-        <p>使用roberta 训练，一个训练2轮，然后在2轮的基础上再训练6轮，也就是一共8轮<br>然后在8404820个数据上去预测结果，其中label 不同的有613706个，在label为1的基础上score 大于0.8的，也就是 两次score 差了至少0.3以上的，有71404，接近1%，有趣的数字，其实根据f1_score，两次相差不过3%左右，但是就细节层面， 标签的变动差别更大，而且就预测效果而已，目测确实epoch8的更符合人的直觉</p>
+        <h4 id="1-可以使用已经存在的相似模型和数据迅速积累正负样本"><a href="#1-可以使用已经存在的相似模型和数据迅速积累正负样本" class="headerlink" title="1. 可以使用已经存在的相似模型和数据迅速积累正负样本"></a>1. 可以使用已经存在的相似模型和数据迅速积累正负样本</h4><p>这有点像迁移学习，使用一个相似的模型，预测一批case，然后人工处理其中一部分score比较高或者低的，这样的话，得到的数据中含有期待的正负样本比例会比较高</p>
+<h4 id="2-自己准备的测试case和最常问的case并不重叠"><a href="#2-自己准备的测试case和最常问的case并不重叠" class="headerlink" title="2. 自己准备的测试case和最常问的case并不重叠"></a>2. 自己准备的测试case和最常问的case并不重叠</h4><p>这次本来请标注组准备了不少的测试case，但是发现真正内测的时候，真正问的问题和标注组准备的问题，并不重合，一般人问的都太简单了。</p>
+<h4 id="3-数据量很关键，召回也很关键"><a href="#3-数据量很关键，召回也很关键" class="headerlink" title="3. 数据量很关键，召回也很关键"></a>3. 数据量很关键，召回也很关键</h4><p>再好的语义模型，没有召回合适的候选集，也无法发挥作用，es的bm25并不能充分发挥数据，还是需要结合向量一起来。</p>
+<h4 id="4-负样本很重要"><a href="#4-负样本很重要" class="headerlink" title="4. 负样本很重要"></a>4. 负样本很重要</h4><p>通过去掉关键词和包含领域关键词的这种做法，我们迅速积累了大批的对比数据，这对提高语义准确度起了很关键的作用，这样模型就能迅速学到关键内容起到的作用。两句话很相似，但是缺少了核心领域词，语义就是不一致。</p>
 
       
     </div>
@@ -326,12 +329,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
-          
-        </div>
-      
 
       
       
@@ -341,8 +338,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/01/兴盛与危机：论中国社会的超稳定结构/" rel="next" title="兴盛与危机：论中国社会的超稳定结构">
-                <i class="fa fa-chevron-left"></i> 兴盛与危机：论中国社会的超稳定结构
+              <a href="/2021/05/19/epoch-轮数的影响/" rel="next" title="epoch 轮数的影响">
+                <i class="fa fa-chevron-left"></i> epoch 轮数的影响
               </a>
             
           </div>
@@ -350,10 +347,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/07/08/汽车大脑目前学到的有用经验/" rel="prev" title="汽车大脑目前学到的有用经验">
-                汽车大脑目前学到的有用经验 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,8 +398,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -457,6 +459,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-可以使用已经存在的相似模型和数据迅速积累正负样本"><span class="nav-number">1.</span> <span class="nav-text">1. 可以使用已经存在的相似模型和数据迅速积累正负样本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-自己准备的测试case和最常问的case并不重叠"><span class="nav-number">2.</span> <span class="nav-text">2. 自己准备的测试case和最常问的case并不重叠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-数据量很关键，召回也很关键"><span class="nav-number">3.</span> <span class="nav-text">3. 数据量很关键，召回也很关键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-负样本很重要"><span class="nav-number">4.</span> <span class="nav-text">4. 负样本很重要</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

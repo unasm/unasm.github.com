@@ -243,6 +243,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unasm.com/2021/07/08/汽车大脑目前学到的有用经验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/08/汽车大脑目前学到的有用经验/" itemprop="url">汽车大脑目前学到的有用经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-08T21:42:49+08:00">
+                2021-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="1-可以使用已经存在的相似模型和数据迅速积累正负样本"><a href="#1-可以使用已经存在的相似模型和数据迅速积累正负样本" class="headerlink" title="1. 可以使用已经存在的相似模型和数据迅速积累正负样本"></a>1. 可以使用已经存在的相似模型和数据迅速积累正负样本</h4><p>这有点像迁移学习，使用一个相似的模型，预测一批case，然后人工处理其中一部分score比较高或者低的，这样的话，得到的数据中含有期待的正负样本比例会比较高</p>
+<h4 id="2-自己准备的测试case和最常问的case并不重叠"><a href="#2-自己准备的测试case和最常问的case并不重叠" class="headerlink" title="2. 自己准备的测试case和最常问的case并不重叠"></a>2. 自己准备的测试case和最常问的case并不重叠</h4><p>这次本来请标注组准备了不少的测试case，但是发现真正内测的时候，真正问的问题和标注组准备的问题，并不重合，一般人问的都太简单了。</p>
+<h4 id="3-数据量很关键，召回也很关键"><a href="#3-数据量很关键，召回也很关键" class="headerlink" title="3. 数据量很关键，召回也很关键"></a>3. 数据量很关键，召回也很关键</h4><p>再好的语义模型，没有召回合适的候选集，也无法发挥作用，es的bm25并不能充分发挥数据，还是需要结合向量一起来。</p>
+<h4 id="4-负样本很重要"><a href="#4-负样本很重要" class="headerlink" title="4. 负样本很重要"></a>4. 负样本很重要</h4><p>通过去掉关键词和包含领域关键词的这种做法，我们迅速积累了大批的对比数据，这对提高语义准确度起了很关键的作用，这样模型就能迅速学到关键内容起到的作用。两句话很相似，但是缺少了核心领域词，语义就是不一致。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unasm.com/2021/05/19/epoch-轮数的影响/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1610,138 +1733,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unasm.com/2019/10/26/读货币战争有感/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="无所欲无所忧，无心者无所求，饱食而遨游，泛若不系之舟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/26/读货币战争有感/" itemprop="url">读货币战争有感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-26T11:22:30+08:00">
-                2019-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>看到电脑里面有这本书，很久以前似乎有人推荐过，就打开看了，200页，闲书，两天就看完了。</p>
-<p>我并不喜欢这本书，或者说，我并不喜欢阴谋论，尤其我不喜欢最后关于黄金的看法，后来在网上看，嗯，看到大家都在骂他我就放心了。阴谋论……就像羽毛球，一招一式皆有法度，有的就是我能做到而你做不到，做好做不好。</p>
-<p>凯恩斯的通论，就其基本理念来说，在我看来是不可动摇的，差不多是现在政府施政的基本理念了，还有把黄金说的就像这个世界的救世主一样，法币就是世界的阴谋…., 通货紧缩是比通货膨胀更可怕的敌人，好吧。</p>
-<p>不过，如果说这本书有什么可取之处，那就是关于关于石油的那段阴谋喽，石油涨价400%，由此一举奠定了石油美元的地位，顺便收割东南亚各国。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这个计划最出彩的地方就是“嫁祸于人”，煽动埃及和叙利亚进攻以色列，美国再公开支持以色列来激怒阿拉伯人，最后阿拉伯国家一怒之下对西方国家实施石油禁运，石油价格一飞冲天，而全世界的怒气则全部发泄到阿拉伯国家身上，银行家们一面坐山观虎斗，一面清点着石油美元回流的钞票，一举挽回美元颓势，重夺金融战场主动权，顺手牵羊剪割拉美印尼等国。</span><br><span class="line"></span><br><span class="line">石油价格暴涨使得拉美印尼国家的大量资金被高油价所吞噬，发展中国家要不停止工业化进程，无法偿还世界银行的过量贷款，要不就得向世界银行借更多的钱来购买石油和偿还巨额债务的本息。而世界银行的援助条件则是著名的“IMF四副良药”，国家核心资产私有化，资本市场自由化，生活要素市场市场化，自由贸易国家化，大部分国家喝下这几幅药非死即伤。</span><br></pre></td></tr></table></figure>
-
-<p>不知道是不是真的，反正以色列是美国的跟班，以色列和阿拉伯世界的战争要是跟美国没有关系，我也不会信吧。美国与沙特深度结盟，进而打垮欧佩克，亚洲金融危机也是美国人搅动的，进而大赚特赚，韩国泰国近乎破产, 丧权辱国。</p>
-<p>人为刀俎，这也是人家的权利吧。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1787,7 +1783,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
